@@ -1,392 +1,555 @@
 <!doctype html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Good Habbits Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Good Habbits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f5f1;--card:#fff;--ink:#1d1d1b;--mute:#6b6a66;--line:#e4e2dc;--acc:#1f7a4d;--acc2:#e8f3ec;--warn:#b45309;--bad:#b91c1c;--onacc:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#9b9a94;--line:#33322f;--acc:#4ade80;--acc2:#1b2e22;--warn:#f59e0b;--bad:#f87171;--onacc:#0b1a10}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
-.wrap{max-width:900px;margin:0 auto;padding:16px}
-h1{font-size:21px;margin:8px 0 2px}h2{font-size:17px;margin:0 0 10px}h3{font-size:15px;margin:14px 0 6px}
+:root{--bg:#f3f6f4;--card:#ffffff;--ink:#14201b;--mute:#66736d;--line:#e3e9e5;--acc:#0f9d63;--acc2:#e6f6ee;--acc3:#c9eedb;--warn:#d97706;--bad:#dc2626;--onacc:#fff;--shadow:0 2px 10px rgba(20,40,30,.06);--g1:#0f766e;--g2:#16a34a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1311;--card:#151d1a;--ink:#e8efeb;--mute:#93a19a;--line:#24302b;--acc:#34d399;--acc2:#12261d;--acc3:#1b3a2c;--warn:#fbbf24;--bad:#f87171;--onacc:#062016;--shadow:none;--g1:#115e59;--g2:#15803d}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Poppins,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px 100px}
+a{color:var(--acc)}
+h2{font-size:18px;margin:0 0 10px;font-weight:600}h3{font-size:15px;margin:16px 0 8px;font-weight:600}
 .sub{color:var(--mute);font-size:13px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font-size:14px}
-.tabs button.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin-top:14px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
-.kpi b{display:block;font-size:23px}.kpi span{color:var(--mute);font-size:12px}
-.daynav{display:flex;align-items:center;gap:8px;justify-content:space-between}
-.daynav button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:18px}
-.plan{background:var(--acc2);border-radius:10px;padding:10px 12px;margin:10px 0}
-.row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+/* hero */
+.hero{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border-radius:0 0 26px 26px;padding:18px 18px 22px;margin:0 -16px;position:relative}
+@media(min-width:860px){.hero{border-radius:24px;margin:16px 0 0}}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hero h1{font-size:20px;margin:0;font-weight:700}
+.hero .mantra{opacity:.9;font-size:13px;margin-top:2px}
+.hero .stats{display:flex;gap:16px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.hero .st b{display:block;font-size:22px;line-height:1.1}.hero .st span{font-size:12px;opacity:.85}
+.daynav{display:flex;align-items:center;gap:8px;margin-top:14px;background:rgba(255,255,255,.15);border-radius:14px;padding:6px}
+.daynav button{border:0;background:rgba(255,255,255,.2);color:#fff;border-radius:10px;width:40px;height:36px;font-size:20px;cursor:pointer}
+.daynav div{flex:1;text-align:center;font-weight:600}
+.daynav small{display:block;font-weight:400;opacity:.85;font-size:12px}
+/* nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.nav button{border:0;background:none;color:var(--mute);font:inherit;font-size:11px;padding:4px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;border-radius:12px}
+.nav button i{font-style:normal;font-size:20px}
+.nav button.on{color:var(--acc);background:var(--acc2);font-weight:600}
+@media(min-width:860px){.nav{position:sticky;top:0;bottom:auto;border:1px solid var(--line);border-radius:16px;margin:14px 0 0;grid-template-columns:repeat(6,auto);justify-content:start;gap:6px;padding:6px;box-shadow:var(--shadow)}
+ .nav button{flex-direction:row;font-size:14px;padding:8px 14px;gap:6px}.nav button i{font-size:17px}.wrap{padding-bottom:40px}}
+/* grids */
+.g2{display:grid;gap:14px}.g2>*{min-width:0}@media(min-width:860px){.g2{grid-template-columns:1fr 1fr}.g2>.card{margin:0}}
+.habits{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:600px){.habits{grid-template-columns:repeat(4,1fr)}}
+.hab{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:12px 10px;text-align:left;font:inherit;cursor:pointer;display:flex;gap:10px;align-items:center;transition:.15s}
+.hab i{font-style:normal;font-size:24px}.hab b{font-size:13px;font-weight:600;line-height:1.25}.hab small{display:block;font-size:11px;color:var(--mute);font-weight:400}
+.hab.on{border-color:var(--acc);background:var(--acc2)}
+.hab.on::after{content:"✓";margin-left:auto;color:var(--acc);font-weight:700}
+.row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
 .row:last-child{border-bottom:0}
-.row input[type=checkbox]{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--acc)}
-.row label{flex:1}.row small{color:var(--mute);display:block}
-input[type=number],input[type=password],input[type=text]{padding:7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
-input[type=number]{width:75px}
-textarea{width:100%;min-height:60px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
-.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
+.row input[type=checkbox]{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--acc)}
+.row label{flex:1;cursor:pointer}.row.done label{color:var(--mute);text-decoration:line-through}
+.pill{display:inline-block;font-size:12px;padding:2px 10px;border-radius:99px;background:var(--acc2);color:var(--acc);font-weight:600;margin-left:6px;vertical-align:middle}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--acc2);color:var(--acc);font-weight:600}
+.ex{list-style:none;padding:0;margin:6px 0;counter-reset:e}
+.ex li{counter-increment:e;padding:10px 0 10px 38px;position:relative;border-bottom:1px dashed var(--line)}
+.ex li:last-child{border-bottom:0}
+.ex li::before{content:counter(e);position:absolute;left:0;top:10px;width:26px;height:26px;border-radius:50%;background:var(--acc2);color:var(--acc);font-weight:700;font-size:13px;display:grid;place-items:center}
+.ex li b{display:block;font-weight:600}.ex li small{color:var(--mute);font-size:13px;display:block;margin-top:2px}
+details{border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";color:var(--mute)}details[open] summary::after{content:"▴"}
+.big{font-size:17px;font-weight:600;margin:2px 0 6px}
+.race{color:var(--bad)}
+.inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.inputs label{font-size:12px;color:var(--mute)}
+input[type=number],input[type=password],input[type=text]{width:100%;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{width:100%;min-height:70px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;margin-top:10px}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .3s}
+.cat{display:grid;grid-template-columns:150px 1fr 44px;gap:10px;align-items:center;margin:8px 0;font-size:13px}
+.cat b{text-align:right;font-weight:600}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center;vertical-align:top}
+th,td{padding:7px 5px;border-bottom:1px solid var(--line);text-align:center}
+th{color:var(--mute);font-weight:500;font-size:12px}
 th:first-child,td:first-child{text-align:left;white-space:nowrap}
-.tl td{text-align:left}
-.tw{overflow-x:auto}
-.ok{color:var(--acc);font-weight:600}.no{color:var(--bad)}.mid{color:var(--warn)}
-ul,ol{padding-left:20px;margin:6px 0}li{margin:3px 0}
-.btn{border:1px solid var(--acc);background:transparent;color:var(--acc);padding:7px 12px;border-radius:8px;cursor:pointer;margin:4px 4px 0 0;font:inherit;display:inline-block}
+.tl td,.tl th{text-align:left;vertical-align:top}
+.tw{overflow-x:auto;margin:0 -4px;padding:0 4px}
+.ok{color:var(--acc);font-weight:700}.no{color:var(--bad)}.mid{color:var(--warn);font-weight:600}
+.btn{border:1.5px solid var(--acc);background:transparent;color:var(--acc);padding:9px 14px;border-radius:12px;cursor:pointer;margin:6px 6px 0 0;font:inherit;font-weight:600;display:inline-block;font-size:14px}
 .btn.fill{background:var(--acc);color:var(--onacc)}
 .hide{display:none}
-.race{font-weight:700;color:var(--bad)}
-details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
-summary{cursor:pointer;font-weight:600}
-.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--acc2);color:var(--acc);margin-left:6px}
-#syncS{font-size:12px;color:var(--mute)}
-.warnbox{border-left:4px solid var(--warn);padding:8px 12px;background:var(--acc2);border-radius:6px}
+.note{border-left:4px solid var(--warn);padding:10px 14px;background:var(--acc2);border-radius:10px;font-size:14px}
+.ringwrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;flex:1;min-width:220px}
+.kpi{background:var(--acc2);border-radius:14px;padding:10px 12px}.kpi b{display:block;font-size:20px}.kpi span{font-size:12px;color:var(--mute)}
+.chart svg{width:100%;height:auto;display:block}
+.qa{border-bottom:1px dashed var(--line);padding:8px 0}.qa:last-child{border:0}
+.qa .row{border:0;padding:0}
+.qa .ans{margin:6px 0 0 34px;font-size:13.5px;color:var(--mute)}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.seg button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:99px;font:inherit;font-size:13px;cursor:pointer}
+.seg button.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+#syncS{font-size:11px;opacity:.9;text-align:right}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>🏃 Good Habbits: 24 Nov → 10 Jan</h1>
-  <div class="sub">Running · vegetarian diet · skin · Python/Django job switch · sleep by 12 &nbsp; <span id="syncS"></span></div>
-  <div class="tabs">
-    <button data-t="today" class="on">Aaj</button>
-    <button data-t="sheet">Balance sheet</button>
-    <button data-t="study">Study plan</button>
-    <button data-t="run">Run + exercise</button>
-    <button data-t="diet">Diet + juice + skin</button>
-    <button data-t="routine">Routine</button>
-    <button data-t="settings">⚙ Sync / settings</button>
-  </div>
+  <header class="hero">
+    <div class="top"><div><h1>💪 Mission 10 Jan</h1><div class="mantra" id="mantra"></div></div><div id="syncS"></div></div>
+    <div class="stats">
+      <svg id="heroRing" width="74" height="74"></svg>
+      <div class="st"><b id="hDays">–</b><span>divas baki (race)</span></div>
+      <div class="st"><b id="hDay">–</b><span>journey day</span></div>
+      <div class="st"><b id="hStreak">–</b><span>🔥 streak</span></div>
+    </div>
+  </header>
 
-  <!-- TODAY -->
+  <nav class="nav" id="nav">
+    <button data-t="today" class="on"><i>🏠</i>Aaj</button>
+    <button data-t="sheet"><i>📊</i>Hisaab</button>
+    <button data-t="study"><i>📚</i>Study</button>
+    <button data-t="interview"><i>🎤</i>Interview</button>
+    <button data-t="body"><i>🏃</i>Body</button>
+    <button data-t="more"><i>⚙️</i>More</button>
+  </nav>
+
+  <!-- ============ AAJ ============ -->
   <section id="today">
-    <div class="kpis">
-      <div class="kpi"><b id="kDays">–</b><span>days to race</span></div>
-      <div class="kpi"><b id="kScore">–</b><span>average habit score</span></div>
-      <div class="kpi"><b id="kStudy">–</b><span>study tasks done</span></div>
-      <div class="kpi"><b id="kPrep">–</b><span>total study hours</span></div>
-      <div class="kpi"><b id="kStreak">–</b><span>workout streak</span></div>
-    </div>
-    <div class="card">
-      <div class="daynav"><button id="prev">‹</button><h2 id="dTitle" style="margin:0;text-align:center"></h2><button id="next">›</button></div>
-      <div id="dBody"></div>
-      <h3>✅ Daily habits</h3>
-      <div id="checks"></div>
-      <div class="row"><label>Study hours today<small>Morning DSA + evening topic</small></label><input type="number" id="prep" min="0" max="12" step="0.5"></div>
-      <div class="row"><label>Weight (kg)<small>Fill in every Sunday morning</small></label><input type="number" id="wt" min="30" max="200" step="0.1"></div>
-      <div class="row"><label>2 km time (min)<small>Fill in on time-trial days</small></label><input type="number" id="rt" min="5" max="40" step="0.1"></div>
-      <div style="margin-top:10px"><textarea id="note" placeholder="Note: how was the run, how do you feel, which questions did you get stuck on..."></textarea></div>
-      <div style="margin-top:10px"><div class="sub">Today's habit score: <b id="dScore">0%</b></div><div class="bar"><i id="dBar" style="width:0"></i></div></div>
-    </div>
-  </section>
-
-  <!-- SHEET -->
-  <section id="sheet" class="hide">
-    <div class="card">
-      <h2>Balance sheet</h2>
-      <div class="sub" style="margin-bottom:8px">Tap any row to open that day.</div>
-      <div class="tw"><table id="tbl"></table></div>
-      <div style="margin-top:12px">
-        <button class="btn" id="exp">⬇ Backup (JSON)</button>
-        <label class="btn">⬆ Restore<input type="file" id="imp" accept=".json" hidden></label>
+    <div class="card" style="padding:12px 14px">
+      <div class="daynav" style="background:var(--acc2);margin:0">
+        <button id="prev" style="background:var(--card);color:var(--ink)">‹</button>
+        <div style="color:var(--ink)"><span id="dTitle"></span><small id="dSub" style="color:var(--mute)"></small></div>
+        <button id="next" style="background:var(--card);color:var(--ink)">›</button>
       </div>
     </div>
+    <div class="card">
+      <h2>✅ Aaj cha checklist <span class="pill" id="dScore">0%</span></h2>
+      <div class="habits" id="habits"></div>
+      <div class="bar" style="margin-top:12px"><i id="dBar" style="width:0"></i></div>
+    </div>
+    <div class="g2">
+      <div class="card" id="exCard"></div>
+      <div class="card" id="studyCard"></div>
+    </div>
+    <div class="g2">
+      <div class="card" id="foodCard"></div>
+      <div class="card" id="careCard"></div>
+    </div>
+    <div class="card">
+      <h2>📝 Aajche numbers</h2>
+      <div class="inputs">
+        <div><label>Study hours</label><input type="number" id="prep" min="0" max="14" step="0.5" inputmode="decimal"></div>
+        <div><label>Weight (kg)</label><input type="number" id="wt" min="30" max="200" step="0.1" inputmode="decimal"></div>
+        <div><label>2 km time (min)</label><input type="number" id="rt" min="5" max="40" step="0.1" inputmode="decimal"></div>
+      </div>
+      <textarea id="note" placeholder="Aaj kasa gela? Run, mood, kuthe atakla… (note)"></textarea>
+    </div>
   </section>
 
-  <!-- STUDY -->
+  <!-- ============ HISAAB ============ -->
+  <section id="sheet" class="hide">
+    <div class="card">
+      <h2>📊 Overall progress</h2>
+      <div class="ringwrap">
+        <svg id="bigRing" width="140" height="140"></svg>
+        <div class="kpis">
+          <div class="kpi"><b id="kDone">–</b><span>divas complete</span></div>
+          <div class="kpi"><b id="kStudy">–</b><span>study tasks</span></div>
+          <div class="kpi"><b id="kHrs">–</b><span>total study hours</span></div>
+          <div class="kpi"><b id="kIQ">–</b><span>interview Qs ready</span></div>
+          <div class="kpi"><b id="kWt">–</b><span>weight change</span></div>
+          <div class="kpi"><b id="kRun">–</b><span>best 2 km time</span></div>
+        </div>
+      </div>
+      <h3>Habit-wise (aaj paryant)</h3>
+      <div id="cats"></div>
+    </div>
+    <div class="card chart">
+      <h2>📈 Roj cha score</h2>
+      <div id="chart"></div>
+      <div class="sub">Green: 80%+ · Orange: 50–79% · Red: &lt;50% · Grey: baki</div>
+    </div>
+    <div class="card">
+      <h2>🗓 Weekly balance sheet</h2>
+      <div class="tw"><table id="wkTbl"></table></div>
+    </div>
+    <div class="card">
+      <h2>📒 Daily balance sheet</h2>
+      <div class="sub" style="margin-bottom:6px">Row var tap kar → to divas ughdel</div>
+      <div class="tw"><table id="tbl"></table></div>
+      <button class="btn" id="exp">⬇ Backup</button><label class="btn">⬆ Restore<input type="file" id="imp" accept=".json" hidden></label>
+    </div>
+  </section>
+
+  <!-- ============ STUDY ============ -->
   <section id="study" class="hide">
     <div class="card">
-      <h2>📚 Study plan: Python (2 yrs) → strong Django backend developer</h2>
-      <p class="sub">Every morning 8:30–9:15: 2 DSA problems. Every evening 9:00–11:00: the topic below. Weekends: project + applications. Project <b>ShopLite</b> (Django + DRF + PostgreSQL + Redis + Celery + Docker + tests + live deploy) is the centrepiece of your resume.</p>
-      <div class="sub">Weeks: 1–2 Advanced Python · 3 SQL · 4 Django ORM · 5 Django internals + DRF · 6 Deploy + system design · 7 Revision + mocks</div>
+      <h2>📚 Python-first study plan</h2>
+      <p class="sub" style="margin-top:0">Focus: <b>Advanced Python + Django + ORM + SQL</b>. Morning (7:45–8:30): Python challenge on Tue/Thu/Sat, just 1 DSA problem on Mon/Wed/Fri. Evening (9–11): the main topic. Weekends: build the <b>ShopLite</b> project (Django + DRF + Postgres + Redis + Celery + Docker, live deploy). It's the hero of your resume.</p>
+      <div class="seg"><span class="tag">W1–2 Advanced Python</span><span class="tag">W3 SQL</span><span class="tag">W4 Django ORM</span><span class="tag">W5 Django + DRF</span><span class="tag">W6 Deploy + System design</span><span class="tag">W7 Revision + Mocks</span></div>
       <div id="studyList"></div>
     </div>
   </section>
 
-  <!-- RUN -->
-  <section id="run" class="hide">
+  <!-- ============ INTERVIEW ============ -->
+  <section id="interview" class="hide">
     <div class="card">
-      <h2>🏃 Running + exercise</h2>
-      <p class="sub">Run days: Mon/Wed/Fri/Sat. Strength: Tue (A) / Thu (B). Sunday: rest + walk. Run at a pace where you can still talk. <b>Sharp pain in a knee, shin or ankle = stop, and walk that day.</b> Normal soreness is fine.</p>
-      <details><summary>Warm-up before every run (8 min)</summary><ol id="wu"></ol></details>
-      <details><summary>Cool-down after every workout (8 min)</summary><ol id="cd"></ol></details>
-      <details><summary>Strength A (Tuesday)</summary><ol id="sa"></ol><div class="sub">Reps increase in weeks 3 and 5. The "Aaj" page always shows that day's exact reps.</div></details>
-      <details><summary>Strength B (Thursday)</summary><ol id="sb"></ol></details>
-      <h3>Day-by-day</h3>
-      <div class="tw" id="runTbl"></div>
+      <h2>🎤 Interview preparation</h2>
+      <div class="sub">Tick each question once you can answer it confidently <b>out loud, in your own words</b>.</div>
+      <div style="margin:10px 0 4px;display:flex;justify-content:space-between;font-size:13px"><span>Ready</span><b id="iqPct">0%</b></div>
+      <div class="bar"><i id="iqBar" style="width:0"></i></div>
     </div>
-  </section>
-
-  <!-- DIET -->
-  <section id="diet" class="hide">
     <div class="card">
-      <h2>🥗 Vegetarian diet (stamina + skin)</h2>
-      <ul>
-        <li><b>6:45 am:</b> 1 glass of warm water + 5 soaked almonds + 2 walnuts + 1 tsp soaked chia/flax seeds</li>
-        <li><b>Before the run (only if hungry):</b> half a banana or 2 dates</li>
-        <li><b>8:00 am:</b> juice of the day + breakfast</li>
-        <li><b>1:00 pm:</b> lunch (tiffin) · <b>4:30 pm:</b> snack · <b>8:30 pm:</b> dinner (2.5 hours before sleep)</li>
-        <li><b>10:30 pm (optional):</b> haldi doodh (a pinch of turmeric + black pepper)</li>
-        <li><b>Water:</b> 3 litres. Finish 1 litre by 11 am, 2 litres by 4 pm.</li>
-        <li><b>Protein target: 60–70 g a day.</b> Paneer 100 g ≈ 18 g · soya 50 g dry ≈ 25 g · dal 1 bowl ≈ 9 g · curd 1 bowl ≈ 6 g · milk 1 glass ≈ 8 g · sprouts 1 bowl ≈ 10 g</li>
-        <li><b>Cut out:</b> sugar/sweets, cold drinks, packaged juice, maida, fried snacks, late-night snacking. Limit chai to 2 cups (no sugar or less).</li>
+      <h2>🗺 Interview cha game plan</h2>
+      <ul class="ex">
+        <li><b>Resume (week 1)</b><small>1 page. Every bullet = action + tech + number (e.g. "Cut API response time from 1.2s to 300ms with select_related + Redis"). Top skills: Python, Django, DRF, PostgreSQL, Redis, Celery, Docker.</small></li>
+        <li><b>Naukri + LinkedIn (week 1)</b><small>Headline: "Python Django Developer | DRF | PostgreSQL | Redis | Celery | 2 yrs". Open to work ON. Update your Naukri profile every 2–3 days (it pushes you up in search).</small></li>
+        <li><b>Apply (every Sunday)</b><small>10–15 jobs: Naukri, LinkedIn, Instahyre, Cutshort, Wellfound. 5 referral messages: short, specific, with your resume link.</small></li>
+        <li><b>Typical rounds</b><small>1) Python + Django theory, 2) live coding (Python/ORM/SQL, sometimes 1 DSA problem), 3) project + system design basics, 4) manager/HR.</small></li>
+        <li><b>During the interview</b><small>Think out loud. If you don't know, say "I haven't used it, but here's how I'd approach it…". Have examples from your project ready.</small></li>
+        <li><b>Mock interviews</b><small>Sun 13 Dec, Sun 27 Dec, Sun 3 Jan, Sat 9 Jan. Record yourself, watch it back, improve.</small></li>
       </ul>
-      <h3>7-day menu</h3>
-      <div class="tw"><table class="tl" id="mealTbl"></table></div>
     </div>
-    <div class="card">
-      <h2>🥤 Juice of the day (blender/juicer)</h2>
-      <div class="tw"><table class="tl" id="juiceTbl"></table></div>
-      <p class="sub">Don't strain the blender ones (fibre is good for you). No sugar. Drink fresh. Don't drink juice on an empty stomach if you get acidity; have 2–3 almonds first.</p>
+    <div id="iqList"></div>
+  </section>
+
+  <!-- ============ BODY ============ -->
+  <section id="body" class="hide">
+    <div class="card" style="padding:10px 12px"><div class="seg" id="bodySeg" style="margin:0">
+      <button data-b="b-run" class="on">🏃 Running</button><button data-b="b-ex">💪 Exercises</button><button data-b="b-food">🥣 Nashta + juice</button><button data-b="b-skin">✨ Skin</button><button data-b="b-hair">💇 Hair</button>
+    </div></div>
+    <div id="b-run" class="bsec">
+      <div class="card">
+        <h2>🏃 Running plan</h2>
+        <ul class="ex">
+          <li><b>Jog mhanje kay?</b><small>A pace where you can still talk easily. If you can't speak a full sentence, slow down. Speed comes later.</small></li>
+          <li><b>Week cha pattern</b><small>Run on Mon/Wed/Fri/Sat · Strength A on Tue · Strength B on Thu · Sunday rest + walk</small></li>
+          <li><b>Every run</b><small>Warm-up (8 min) → main run → cool-down (8 min). Never skip these, they prevent injuries.</small></li>
+          <li><b>Pain rule</b><small>Normal soreness is fine. <b>Sharp pain</b> in a knee, shin or ankle = stop, and just walk that day. Running shoes are a must (not chappals or flat sneakers).</small></li>
+        </ul>
+      </div>
+      <div class="card"><h2>📅 Day-by-day</h2><div class="tw" id="runTbl"></div></div>
     </div>
-    <div class="card">
-      <h2>✨ Pigmentation: what actually works</h2>
-      <div class="warnbox">Honest truth: <b>juice alone will not remove pigmentation.</b> What fades it most is <b>sunscreen every day</b> plus a simple routine. Diet and juice help from the inside. You'll see a visible improvement in 6–8 weeks, and pigmentation fades fully over 3–6 months. If the patches are brownish and symmetrical on the cheeks or forehead (possible melasma), or there's no change in 6–8 weeks, <b>see a dermatologist once</b>. They can prescribe proper creams.</div>
-      <h3>☀️ Morning (after bath, 2 min)</h3>
-      <ol>
-        <li>Gentle face wash (no scrubbing)</li>
-        <li>Niacinamide 5% serum OR vitamin C serum (2–3 drops)</li>
-        <li>Light moisturizer</li>
-        <li><b>Sunscreen SPF 50, PA+++</b>: two finger-lengths for face + neck. <b>Reapply at 1:30 pm</b> in the office as well (sunlight from windows counts too)</li>
-      </ol>
-      <h3>🌙 Night (11:15 pm, 2 min)</h3>
-      <ol>
-        <li>Face wash (wash twice if you wore sunscreen)</li>
-        <li>Niacinamide 5% serum</li>
-        <li>Moisturizer</li>
-      </ol>
-      <h3>🍊 Foods for skin (include every day)</h3>
-      <ul>
-        <li><b>Vitamin C:</b> 1 amla / 1 orange / 1 guava / lemon in dal. Reduces melanin and helps collagen</li>
-        <li><b>Lycopene:</b> cooked tomato (sabzi/soup), protects against sun damage</li>
-        <li><b>Beta-carotene:</b> carrot, papaya, pumpkin</li>
-        <li><b>Vitamin E + zinc:</b> 5 almonds + 1 tbsp pumpkin seeds + 1 tbsp sunflower seeds</li>
-        <li><b>Omega-3:</b> 2 walnuts + 1 tsp flax/chia</li>
-        <li><b>Green tea:</b> 1–2 cups (instead of a sugary chai)</li>
-        <li><b>Avoid:</b> sugar, fried food, too much milk-sweet stuff. Sleep by 12 (skin repairs at night)</li>
-      </ul>
-      <h3>❌ Don't do</h3>
-      <ul><li>Lemon / baking soda / toothpaste directly on the face</li><li>Scrubbing daily, picking pimples</li><li>Going out in the sun without sunscreen or a cap</li><li>Using several new products at once (patch test first)</li></ul>
-      <p class="sub">Progress check: every Sunday take a face photo in the same spot, same light, no filter. Compare week 1 vs week 7.</p>
+    <div id="b-ex" class="bsec hide">
+      <div class="card"><h2>🔥 Warm-up (before every run, 8 min)</h2><ol class="ex" id="wu"></ol></div>
+      <div class="card"><h2>🧘 Cool-down (after every workout, 8 min)</h2><ol class="ex" id="cd"></ol></div>
+      <div class="card"><h2>💪 Strength A (Tuesday)</h2><div class="sub">Weeks 1–2 numbers. Reps go up in weeks 3 and 5; the "Aaj" page always shows the exact count.</div><ol class="ex" id="sa"></ol></div>
+      <div class="card"><h2>💪 Strength B (Thursday)</h2><ol class="ex" id="sb"></ol></div>
+    </div>
+    <div id="b-food" class="bsec hide">
+      <div class="card">
+        <h2>🌅 Sakali uthlya-uthlya (6:00)</h2>
+        <ul class="ex"><li><b>1 glass koomat paani</b><small>Room temperature or lukewarm</small></li><li><b>5 bhijavlele badam + 2 walnuts + 1 tsp bhijavlele chia/flax</b><small>Soak them the night before. Good for skin, hair and the brain</small></li><li><b>Run aadhi bhook lagli tar</b><small>Half a banana or 2 khajur (dates)</small></li></ul>
+      </div>
+      <div class="card"><h2>🥤 Juice (amla base, keep it going 👏)</h2><div class="sub">You've been drinking amla juice for 10 days, so keep it as the base and add the day's ingredients. 250–300 ml, no sugar, drink it fresh. If you get acidity, have 2–3 almonds first.</div><ol class="ex" id="juiceL"></ol></div>
+      <div class="card"><h2>🍳 Nashta options (5–10 min, bachelor-friendly)</h2><div class="sub">Pick any one. The "Aaj" page suggests one each day.</div><ol class="ex" id="bfL"></ol></div>
+      <div class="card"><h2>☕ Evening snack (4:30–5)</h2><ol class="ex" id="evL"></ol><div class="sub">Instead of samosas, vada pav or biscuits, choose one of these.</div></div>
+      <div class="card"><h2>🎒 Tiffin box (optional, whenever you can)</h2><div class="sub">Not daily. On days you have time, fill a small box: carry it to the office and eat it at the 4:30 snack time.</div><ol class="ex" id="tfL"></ol>
+        <div class="note" style="margin-top:10px">🛒 <b>Weekly shopping list:</b> amla, carrot, beetroot, oranges, tomato, cucumber, palak, kadhi patta, papaya, banana, apple · oats, brown bread, peanut butter, besan, poha · paneer, dahi, doodh · badam, walnuts, pumpkin seeds, chia/flax, bhajlele chane, makhana, shengdane, khajur</div></div>
+    </div>
+    <div id="b-skin" class="bsec hide">
+      <div class="card">
+        <h2>✨ Pigmentation plan</h2>
+        <div class="note">The honest truth: juice helps from the inside, but <b>what fades pigmentation most is sunscreen every day</b>. You'll see a clear difference in 6–8 weeks, and pigmentation fades fully over 3–6 months. If the patches are brownish on both cheeks or the forehead, or nothing changes in 6 weeks, see a <b>dermatologist</b> once.</div>
+        <h3>☀️ Sakali (7:15, 2 min)</h3>
+        <ol class="ex"><li><b>Gentle face wash</b><small>Don't scrub, just wash lightly</small></li><li><b>Niacinamide 5% serum or Vitamin C serum</b><small>2–3 drops, pat it on gently</small></li><li><b>Light moisturizer</b><small>Gel type is best for oily skin</small></li><li><b>Sunscreen SPF 50, PA+++</b><small>Two finger-lengths for face + neck. <b>Apply it again at 1:30 pm in the office</b>. Sunlight from windows counts too.</small></li></ol>
+        <h3>🌙 Raatri (11:15, 2 min)</h3>
+        <ol class="ex"><li><b>Face wash</b><small>Wash twice if you wore sunscreen</small></li><li><b>Niacinamide 5% serum</b></li><li><b>Moisturizer</b></li></ol>
+        <h3>🍊 Skin food (roj)</h3>
+        <ul class="ex"><li><b>Vitamin C</b><small>Amla juice ✅ + 1 orange/guava</small></li><li><b>Lycopene + beta-carotene</b><small>Tomato, carrot, papaya</small></li><li><b>Vitamin E + zinc</b><small>Almonds, pumpkin seeds, sunflower seeds</small></li><li><b>Avoid</b><small>Sugar, fried food, sleeping late. Never put lemon, baking soda or toothpaste directly on your face</small></li></ul>
+        <div class="sub">📸 Every Sunday take a face photo in the same spot and the same light. Compare week 1 vs week 7.</div>
+      </div>
+    </div>
+    <div id="b-hair" class="bsec hide">
+      <div class="card"><h2>💇 Hair routine</h2><ol class="ex" id="hairR"></ol></div>
+      <div class="card"><h2>🥜 Hair sathi khana</h2><ol class="ex" id="hairF"></ol></div>
+      <div class="card"><div class="note" id="hairD"></div><p class="sub">Realistic: hair fall can drop in 4–6 weeks; new growth shows in about 3 months. Stick with it.</p></div>
     </div>
   </section>
 
-  <!-- ROUTINE -->
-  <section id="routine" class="hide">
+  <!-- ============ MORE ============ -->
+  <section id="more" class="hide">
     <div class="card">
-      <h2>⏰ Weekday routine (10–7 job)</h2>
+      <h2>⏰ Daily routine (6 to 12)</h2>
       <table class="tl">
-        <tr><td>6:45</td><td>Wake up, water + almonds + seeds</td></tr>
-        <tr><td>7:00–7:45</td><td>🏃 Workout per plan (warm-up → main → cool-down)</td></tr>
-        <tr><td>7:45–8:30</td><td>Bath + morning skincare + juice + breakfast</td></tr>
-        <tr><td>8:30–9:15</td><td>📚 2 DSA problems</td></tr>
-        <tr><td>9:15–10:00</td><td>Commute (listen to a tech podcast or system design video)</td></tr>
-        <tr><td>10:00–7:00</td><td>Office · 1 pm lunch · 1:30 sunscreen again · 4:30 snack · water bottle on the desk</td></tr>
-        <tr><td>7:00–8:30</td><td>Commute + freshen up + 10 min walk</td></tr>
-        <tr><td>8:30–9:00</td><td>Dinner</td></tr>
-        <tr><td>9:00–11:00</td><td>📚 Study the day's topic (phone in another room)</td></tr>
-        <tr><td>11:00–11:15</td><td>Fill in the tracker, look at tomorrow's plan, lay out running clothes</td></tr>
-        <tr><td>11:15–11:45</td><td>Night skincare + haldi doodh + no screen</td></tr>
-        <tr><td>12:00</td><td>😴 Sleep (6h45m)</td></tr>
-      </table>
-      <h3>Weekend</h3>
-      <table class="tl">
-        <tr><td>7:30</td><td>Wake up (Sunday 8:00). Saturday = long run</td></tr>
-        <tr><td>10:00–1:00</td><td>📚 Project / study block 1</td></tr>
-        <tr><td>4:00–6:00</td><td>📚 Block 2: applications, referrals, mock interview</td></tr>
-        <tr><td>Sunday evening</td><td>Weekly review: weight, face photo, look at the balance sheet, plan next week</td></tr>
+        <tr><td><b>6:00</b></td><td>Uth! Paani + badam + seeds</td></tr>
+        <tr><td><b>6:15–7:00</b></td><td>🏃 Workout (warm-up → main → cool-down)</td></tr>
+        <tr><td><b>7:00–7:45</b></td><td>Aanghol (bath) + skincare + 🥤 amla juice + 🍳 nashta</td></tr>
+        <tr><td><b>7:45–8:30</b></td><td>🐍 Python challenge / 🧩 1 DSA problem</td></tr>
+        <tr><td><b>8:30–9:15</b></td><td>Get ready, tiffin dabba (optional)</td></tr>
+        <tr><td><b>9:15–10:00</b></td><td>Commute: tech podcast / system design video 🎧</td></tr>
+        <tr><td><b>10:00–7:00</b></td><td>Office · 1:30 sunscreen again · 4:30 healthy snack · 💧 bottle on your desk</td></tr>
+        <tr><td><b>7:00–9:00</b></td><td>Commute, freshen up, dinner</td></tr>
+        <tr><td><b>9:00–11:00</b></td><td>📚 The day's topic (phone in another room)</td></tr>
+        <tr><td><b>11:00–11:30</b></td><td>✅ Fill in the tracker + skin/hair care + lay out tomorrow's running kapde</td></tr>
+        <tr><td><b>11:30–12:00</b></td><td>No screen. Haldi doodh (optional)</td></tr>
+        <tr><td><b>12:00</b></td><td>😴 Zop. (Only 6 hours, so on weekends get 7.5–8 hours)</td></tr>
       </table>
     </div>
-  </section>
-
-  <!-- SETTINGS -->
-  <section id="settings" class="hide">
     <div class="card">
-      <h2>🔄 Sync across devices (one-time setup)</h2>
-      <p>Your data is saved in a <b>private GitHub Gist</b>. Do these steps <b>once on each device</b> (phone + laptop), using the same token:</p>
-      <ol>
-        <li>Open <a href="https://github.com/settings/tokens/new?scopes=gist&description=good_habbits_sync" target="_blank" rel="noopener">this link</a> (log in to GitHub) → set Expiration to "No expiration" or 90 days → only <b>gist</b> is ticked → <b>Generate token</b></li>
-        <li>Copy the token (starts with <code>ghp_</code>). Keep it in WhatsApp "message yourself" / notes so you can paste it on your other device</li>
-        <li>Paste it below → <b>Connect</b>. Do the same on your other device. Done ✅</li>
+      <h2>🔄 Phone + laptop sync</h2>
+      <ol class="ex">
+        <li><b>Token bana</b><small>Open <a href="https://github.com/settings/tokens/new?scopes=gist&description=good_habbits_sync" target="_blank" rel="noopener">this link</a> → Expiration: "No expiration" → only <b>gist</b> ticked → Generate token → copy it (ghp_…)</small></li>
+        <li><b>Paste + Connect</b><small>Paste it here and press Connect. Send the token to yourself on WhatsApp (message yourself)</small></li>
+        <li><b>Dusrya device var</b><small>Open the bookmark → More → paste the same token → Connect. Done ✅</small></li>
       </ol>
-      <input type="password" id="tok" placeholder="ghp_..." style="width:100%;max-width:420px">
+      <input type="password" id="tok" placeholder="ghp_...">
       <div><button class="btn fill" id="conn">Connect</button><button class="btn" id="syncNow">Sync now</button><button class="btn" id="disc">Disconnect</button></div>
       <p class="sub" id="syncInfo"></p>
-      <p class="sub">The token stays only in this browser and can only access gists (not your code). Sync runs automatically whenever you tick something, open the app, or every 2 minutes.</p>
     </div>
     <div class="card">
       <h2>🏁 Race date</h2>
-      <label><input type="radio" name="race" value="2027-01-01"> 1 January</label> &nbsp;
-      <label><input type="radio" name="race" value="2027-01-10"> 10 January</label>
-      <p class="sub">The running plan adjusts automatically (the last 3 days before the race are taper/rest).</p>
+      <div class="seg" id="raceSeg"><button data-r="2027-01-01">1 January</button><button data-r="2027-01-10">10 January</button></div>
+      <div class="sub">The running plan adjusts automatically (the last 3 days are taper/rest).</div>
     </div>
   </section>
 </div>
 
 <script src="data.js"></script>
 <script>
-// ---------- dates ----------
-const START=new Date(2026,10,24), END=new Date(2027,0,10);
+// ---------- dates (day changes at 4 am, since you sleep at 12) ----------
+const START=new Date(2026,10,23),END=new Date(2027,0,10);
 const days=[];for(let d=new Date(START);d<=END;d.setDate(d.getDate()+1))days.push(new Date(d));
 const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const fmt=d=>d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
 const $=id=>document.getElementById(id);
-const todayKey=key(new Date());
+const logicalNow=()=>{const n=new Date(Date.now()-4*3600e3);n.setHours(0,0,0,0);return n};
+const todayIdx=()=>{const n=logicalNow();if(n<START)return 0;if(n>END)return days.length-1;return days.findIndex(d=>key(d)===key(n))};
 
 // ---------- storage ----------
 const LS="gh_tracker_v1",SK="gh_sync_v1",FILE="good_habbits_data.json";
 let DB={},SY={};
+const todayKey=key(days[todayIdx()]);
 try{DB=JSON.parse(localStorage.getItem(LS))||{}}catch(e){}
 try{SY=JSON.parse(localStorage.getItem(SK))||{}}catch(e){}
 const saveLocal=()=>{try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}};
 const saveSY=()=>{try{localStorage.setItem(SK,JSON.stringify(SY))}catch(e){}};
-
 const raceKey=()=>(DB._settings&&DB._settings.race)||"2027-01-10";
 const raceIdx=()=>days.findIndex(d=>key(d)===raceKey());
-const RACE_DATE=()=>days[raceIdx()];
 
-// ---------- running plan ----------
+const MANTRA=["Thoda thoda roj, 10 Jan la bhari result 💪","Consistency > motivation. Chal, uth!","Aaj cha 1% better, bas evdhach 🔥","Body, brain, career: teeno build karu 🚀","Excuses nako, results pahije ✨","Ek divas pan miss nako. Streak japa 🔥","Tu karu shakto. Aaj cha checklist poora kar ✅"];
+
+// ---------- running ----------
 const RUNW=[
- {e:"Walk-run: 1 min jog / 2 min walk × 6 (18 min)",s:"20 min walk-run: 1 min jog / 1 min walk × 10"},
- {e:"Walk-run: 2 min jog / 1 min walk × 6 (18 min)",s:"1 km continuous jog + 1 km walk-run"},
- {e:"Walk-run: 4 min jog / 1 min walk × 4 (20 min)",s:"1.5 km continuous jog 💪"},
- {e:"1.5 km continuous jog + 1 min walk + 500 m jog",s:"2 km with 1 short walk break"},
- {e:"2 km continuous jog 🎯 (slow, no stopping)",s:"2 km TIME TRIAL ⏱ (enter your time in '2 km time')"},
- {e:"2–2.5 km easy jog",w:"Speed: 6 × 200 m fast + 200 m walk between (after warm-up)",s:"3 km easy (so that 2 km feels easy)"},
- {e:"2 km steady",w:"Speed: 4 × 400 m at race pace + 2 min walk between",s:"2 km TIME TRIAL ⏱ (compare with week 5)"}
+ {e:"Walk-run: 1 min jog + 2 min walk. Repeat 6 times (18 min)",s:"Walk-run 20 min: 1 min jog + 1 min walk, 10 times"},
+ {e:"Walk-run: 2 min jog + 1 min walk. Repeat 6 times (18 min)",s:"1 km non-stop jog, then 1 km walk-run"},
+ {e:"Walk-run: 4 min jog + 1 min walk. Repeat 4 times (20 min)",s:"1.5 km non-stop jog 💪"},
+ {e:"1.5 km jog, 1 min walk, then another 500 m jog",s:"2 km with just 1 short walk break"},
+ {e:"2 km non-stop, slow and steady 🎯",s:"2 km TIME TRIAL ⏱: enter your time in '2 km time'"},
+ {e:"2 to 2.5 km easy jog",w:"Speed day: 200 m fast + 200 m walk, 6 times",s:"3 km easy (so that 2 km feels easy)"},
+ {e:"2 km steady",w:"Speed day: 400 m at race pace + 2 min walk, 4 times",s:"2 km TIME TRIAL ⏱: compare it with week 5"}
 ];
 function runFor(i){
-  const R=raceIdx(),d=days[i],dow=d.getDay(),w=Math.floor(i/7);
-  if(i===R) return {k:"race",t:"🏁 RACE DAY, 2 km! Breakfast 2 hours before (banana + toast/poha). Warm up 10 min. Start slower than you want, then push in the last 500 m."};
+  const R=raceIdx(),dow=days[i].getDay(),w=Math.floor(i/7);
+  if(i===R) return {k:"race",t:"🏁 RACE DAY: 2 km! Nashta 2 hours before (banana + toast). 10 min warm-up. Start slow, push in the last 500 m."};
   if(i>R){ if(i===R+1) return {k:"rest",t:"Recovery: 20 min walk + stretching. Congratulations 🎉"};
     if([1,3,5,6].includes(dow)) return {k:"run",t:"Easy 2–3 km run (keep the habit going)"};
-    if(dow===0) return {k:"rest",t:"Rest day: 30 min walk + stretching"};
-    return {k:dow===2?"A":"B",t:"Strength "+(dow===2?"A":"B")+" + 10 min brisk walk"}; }
-  if(i>=R-3) return [{k:"run",t:"Easy 1 km jog + 4 × 50 m strides (quick, relaxed)"},{k:"rest",t:"Rest: 15 min walk + stretching. Eat well, drink lots of water"},{k:"rest",t:"Full rest. Lay out your shoes/kit, carb-rich dinner (rice/roti), sleep by 11 🎽"}][i-(R-3)];
-  if(dow===0) return {k:"rest",t:"Rest day: 30 min easy walk + the full cool-down stretches"};
-  if(i>0&&dow===2) return {k:"A",t:"Strength A + 10 min brisk walk"};
-  if(dow===4) return {k:"B",t:"Strength B + 10 min brisk walk"};
+    if(dow===0) return {k:"rest",t:"Rest: 30 min walk + stretching"};
+    return {k:dow===2?"A":"B",t:"Strength "+(dow===2?"A":"B")+" + 10 min fast walk"}; }
+  if(i>=R-3) return [{k:"run",t:"Easy 1 km jog + 4 strides (50 m fast but relaxed)"},{k:"rest",t:"Rest: 15 min walk + stretching. Drink lots of water"},{k:"rest",t:"Full rest. Lay out your shoes/kapde, eat roti/rice for dinner, sleep by 11 🎽"}][i-(R-3)];
+  if(dow===0) return {k:"rest",t:"Rest day: 30 min easy walk + cool-down stretches"};
+  if(dow===2) return {k:"A",t:"Strength A + 10 min fast walk"};
+  if(dow===4) return {k:"B",t:"Strength B + 10 min fast walk"};
   const W=RUNW[Math.min(w,6)];
   return {k:"run",t:dow===6?W.s:(dow===3&&W.w)?W.w:W.e};
 }
-function exerciseHTML(i){
-  const p=runFor(i),w=Math.floor(i/7),li=a=>"<ol>"+a.map(x=>"<li>"+x+"</li>").join("")+"</ol>";
-  let h=`<b>${p.k==="race"?"<span class='race'>"+p.t+"</span>":p.t}</b>`;
-  if(p.k==="run"||p.k==="race") h+=`<details><summary>Warm-up (8 min)</summary>${li(WARMUP)}</details><details><summary>Cool-down (8 min)</summary>${li(COOLDOWN)}</details>`;
-  else if(p.k==="A"||p.k==="B") h+=`<details open><summary>Strength ${p.k}: exact reps (rest 45 sec between sets)</summary>${li((p.k==="A"?STR_A:STR_B)(w))}</details><details><summary>Cool-down</summary>${li(COOLDOWN)}</details>`;
-  else h+=`<details><summary>Stretches</summary>${li(COOLDOWN)}</details>`;
-  return h;
-}
+const exList=a=>a.map(([n,h])=>`<li><b>${n}</b><small>${h}</small></li>`).join("");
+const ICON={run:"🏃",race:"🏁",rest:"🚶",A:"💪",B:"💪"};
 
 // ---------- habits ----------
 const ITEMS=[
-  ["run","🏃 Workout per plan","Warm-up + main + cool-down"],
-  ["juice","🥤 Juice of the day",""],
-  ["diet","🥗 Clean diet + protein","No sugar, junk or maida"],
-  ["water","💧 3 L water",""],
-  ["study","📚 All study tasks done","Ticks itself when every task above is done"],
-  ["skin","✨ Sunscreen AM (+1:30 pm) & PM routine",""],
-  ["sleep","😴 In bed by 12 am","Phone away at 11:45"]
+  ["run","🏃","Workout jhala","as per plan"],
+  ["juice","🥤","Amla juice","ghetla"],
+  ["diet","🥣","Healthy nashta","+ evening snack"],
+  ["water","💧","3 L paani","pyayla"],
+  ["study","📚","Study done","sagle tasks"],
+  ["skin","✨","Skin + hair care","AM + PM"],
+  ["sleep","😴","12 paryant zop","phone off 11:30"]
 ];
 const score=r=>r?Math.round(ITEMS.filter(([k])=>r[k]).length/ITEMS.length*100):0;
-const tasksFor=i=>dsaFor(i).concat(STUDY[i][1]);
+const tasksFor=i=>morningFor(i).concat(STUDY[i][1]);
 
-// ---------- today ----------
-let cur=days.findIndex(d=>key(d)===todayKey);
-if(cur<0)cur=new Date()<START?0:days.length-1;
+// ---------- ring ----------
+function ring(el,pct,size,stroke,label,light){
+  const r=(size-stroke)/2,c=2*Math.PI*r,off=c*(1-pct/100);
+  el.setAttribute("viewBox",`0 0 ${size} ${size}`);
+  el.innerHTML=`<circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${light?'rgba(255,255,255,.25)':'var(--line)'}" stroke-width="${stroke}"/>
+  <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${light?'#fff':'var(--acc)'}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size/2} ${size/2})"/>
+  <text x="50%" y="${label?'47%':'50%'}" text-anchor="middle" dominant-baseline="middle" font-size="${size/4.6}" font-weight="700" fill="${light?'#fff':'var(--ink)'}" font-family="Poppins">${pct}%</text>
+  ${label?`<text x="50%" y="66%" text-anchor="middle" font-size="${size/12}" fill="${light?'#fff':'var(--mute)'}" font-family="Poppins">${label}</text>`:""}`;
+}
 
+// ---------- stats ----------
+function stats(){
+  const ti=todayIdx(),el=ti+1; // elapsed days incl. today
+  const past=ti>=0?days.slice(0,el):[];
+  const overall=past.length?Math.round(past.reduce((a,d)=>a+score(DB[key(d)]),0)/past.length):0;
+  const cats=ITEMS.map(([k,e,l])=>[e+" "+l,past.length?Math.round(past.filter(d=>(DB[key(d)]||{})[k]).length/past.length*100):0]);
+  let td=0,tt=0;days.forEach((d,i)=>{tt+=tasksFor(i).length;const tk=(DB[key(d)]||{}).tk||{};td+=Object.values(tk).filter(Boolean).length});
+  const hrs=days.reduce((a,d)=>a+(+((DB[key(d)]||{}).prep)||0),0);
+  const iqT=IQ.reduce((a,c)=>a+c.q.length,0),iq=DB._iq||{},iqD=Object.keys(iq).filter(k=>k!=="_t"&&iq[k]).length;
+  let st=0,i=ti;if(i>=0&&score(DB[key(days[i])])<50)i--;for(;i>=0&&score(DB[key(days[i])])>=50;i--)st++;
+  const wts=days.map(d=>(DB[key(d)]||{}).wt).filter(Boolean),rts=days.map(d=>(DB[key(d)]||{}).rt).filter(Boolean);
+  const done=past.filter(d=>score(DB[key(d)])>=80).length;
+  return {ti,overall,cats,td,tt,hrs,iqT,iqD,st,wts,rts,done,past};
+}
+function renderHero(){
+  const S=stats(),n=logicalNow(),R=days[raceIdx()];
+  ring($("heroRing"),S.overall,74,8,"",true);
+  $("hDays").textContent=Math.max(0,Math.round((R-n)/864e5));
+  $("hDay").textContent=(S.ti+1)+"/"+days.length;
+  $("hStreak").textContent=S.st;
+  $("mantra").textContent=MANTRA[(S.ti<0?0:S.ti)%MANTRA.length];
+}
+
+// ---------- AAJ ----------
+let cur=Math.max(0,todayIdx());
 function renderDay(){
-  const i=cur,d=days[i],k=key(d),r=DB[k]||{},dow=d.getDay(),J=JUICE[dow],M=MEALS[dow],T=tasksFor(i),tk=r.tk||{};
-  $("dTitle").textContent=fmt(d)+(k===todayKey?" · aaj":"")+"  (day "+(i+1)+"/"+days.length+")";
+  const i=cur,d=days[i],k=key(d),r=DB[k]||{},dow=d.getDay(),w=Math.floor(i/7),p=runFor(i),T=tasksFor(i),tk=r.tk||{};
+  $("dTitle").textContent=fmt(d)+(k===todayKey?" · Aaj":"");
+  $("dSub").textContent="Day "+(i+1)+" of "+days.length+" · Week "+(w+1);
+  // habits
+  $("habits").innerHTML=ITEMS.map(([id,e,l,s])=>`<button class="hab ${r[id]?"on":""}" data-h="${id}"><i>${e}</i><b>${l}<small>${id==="run"&&p.k==="rest"?"rest/walk day":s}</small></b></button>`).join("");
+  document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{const id=b.dataset.h;upd(k,id,!(DB[k]||{})[id]);b.classList.toggle("on",!!DB[k][id]);});
+  // exercise
+  let ex=`<h2>${ICON[p.k]} Exercise</h2><div class="big ${p.k==='race'?'race':''}">${p.t}</div>`;
+  if(p.k==="run"||p.k==="race") ex+=`<details><summary>🔥 Warm-up (8 min): kasa karaycha</summary><ol class="ex">${exList(WARMUP)}</ol></details><details><summary>🧘 Cool-down (8 min)</summary><ol class="ex">${exList(COOLDOWN)}</ol></details>`;
+  else if(p.k==="A"||p.k==="B") ex+=`<div class="sub">Do all 7 one after another = 1 set. Rest 1–2 min, then the next set.</div><ol class="ex">${exList((p.k==="A"?STR_A:STR_B)(w))}</ol><details><summary>🧘 Cool-down</summary><ol class="ex">${exList(COOLDOWN)}</ol></details>`;
+  else ex+=`<details><summary>🧘 Stretches</summary><ol class="ex">${exList(COOLDOWN)}</ol></details>`;
+  $("exCard").innerHTML=ex;
+  // study
   const done=T.filter((_,j)=>tk[j]).length;
-  $("dBody").innerHTML=`
-   <div class="plan"><h3 style="margin-top:0">🏃 Exercise</h3>${exerciseHTML(i)}</div>
-   <div class="plan"><h3 style="margin-top:0">📚 Study: ${STUDY[i][0]} <span class="pill">${done}/${T.length}</span></h3>
-     ${T.map((t,j)=>`<div class="row"><input type="checkbox" data-tk="${j}" id="tk${j}" ${tk[j]?"checked":""}><label for="tk${j}">${t}</label></div>`).join("")}</div>
-   <div class="plan"><h3 style="margin-top:0">🥤 Juice: ${J[0]}</h3>${J[1]}</div>
-   <div class="plan"><h3 style="margin-top:0">🍽 Meals</h3>
-     <b>Breakfast:</b> ${M.b}<br><b>Lunch:</b> ${M.l}<br><b>4:30 snack:</b> ${M.s}<br><b>Dinner:</b> ${M.d}</div>`;
+  $("studyCard").innerHTML=`<h2>📚 Study <span class="pill">${done}/${T.length}</span></h2><div class="big">${STUDY[i][0]}</div>`+
+    T.map((t,j)=>`<div class="row ${tk[j]?"done":""}"><input type="checkbox" data-tk="${j}" id="tk${j}" ${tk[j]?"checked":""}><label for="tk${j}">${t}</label></div>`).join("");
   document.querySelectorAll("[data-tk]").forEach(c=>c.onchange=e=>{
     const rr=DB[k]=DB[k]||{};rr.tk=rr.tk||{};rr.tk[c.dataset.tk]=e.target.checked;
-    const all=T.every((_,j)=>rr.tk[j]);upd(k,"study",all);renderDay();});
-  $("checks").innerHTML=ITEMS.map(([id,l,s])=>`<div class="row"><input type="checkbox" id="c_${id}" ${r[id]?"checked":""}><label for="c_${id}">${l}${s?`<small>${s}</small>`:""}</label></div>`).join("");
-  ITEMS.forEach(([id])=>$("c_"+id).onchange=e=>upd(k,id,e.target.checked));
+    upd(k,"study",T.every((_,j)=>rr.tk[j]));renderDay();});
+  // food
+  const J=JUICE[dow],B=BREAKFAST[i%BREAKFAST.length];
+  $("foodCard").innerHTML=`<h2>🥣 Aaj cha khana</h2><ol class="ex">
+    <li><b>6:00: paani + 5 badam + 2 walnuts + seeds</b></li>
+    <li><b>🥤 ${J[0]}</b><small>${J[1]}</small></li>
+    <li><b>🍳 Nashta: ${B[0]}</b><small>${B[1]}</small></li>
+    <li><b>☕ 4:30 snack</b><small>${EVENING[i%EVENING.length]}</small></li>
+    <li><b>🎒 Tiffin (vel asel tar)</b><small>${TIFFIN[i%TIFFIN.length]}</small></li></ol>`;
+  // care
+  const oil=dow===3||dow===6,sham=[1,4,0].includes(dow);
+  $("careCard").innerHTML=`<h2>✨ Skin + 💇 Hair</h2><ol class="ex">
+    <li><b>☀️ Sakali</b><small>Face wash → niacinamide/vit C serum → moisturizer → <b>sunscreen SPF 50</b></small></li>
+    <li><b>🏢 1:30 pm</b><small>Sunscreen again</small></li>
+    <li><b>🌙 Raatri</b><small>Face wash → niacinamide → moisturizer</small></li>
+    ${sham?`<li><b>🧴 Aaj shampoo day</b><small>Mild shampoo, only on the scalp, koomat paani, conditioner on the lengths</small></li>`:""}
+    ${oil?`<li><b>🫙 Aaj raatri oil massage</b><small>Coconut oil + 3–4 drops rosemary oil, 5 min fingertip massage. Shampoo in the morning</small></li>`:""}
+    ${dow===0?`<li><b>📸 Sunday photo + weight</b><small>Face photo in the same light + enter your weight in the box below</small></li>`:""}</ol>`;
+  // inputs
   $("prep").value=r.prep??"";$("wt").value=r.wt??"";$("rt").value=r.rt??"";$("note").value=r.note??"";
   $("prep").oninput=e=>upd(k,"prep",e.target.value===""?undefined:+e.target.value);
   $("wt").oninput=e=>upd(k,"wt",e.target.value===""?undefined:+e.target.value);
   $("rt").oninput=e=>upd(k,"rt",e.target.value===""?undefined:+e.target.value);
   $("note").oninput=e=>upd(k,"note",e.target.value);
-  paintScore(k);kpis();
+  paintScore(k);renderHero();
 }
 function paintScore(k){const s=score(DB[k]);$("dScore").textContent=s+"%";$("dBar").style.width=s+"%";}
-function upd(k,f,v){const r=DB[k]=DB[k]||{};if(v===undefined)delete r[f];else r[f]=v;r._t=Date.now();saveLocal();paintScore(k);kpis();schedulePush();}
-function kpis(){
-  const now=new Date();now.setHours(0,0,0,0);
-  $("kDays").textContent=Math.max(0,Math.round((RACE_DATE()-now)/864e5));
-  const past=days.filter(d=>d<=now);
-  $("kScore").textContent=(past.length?Math.round(past.reduce((a,d)=>a+score(DB[key(d)]),0)/past.length):0)+"%";
-  let td=0,tt=0;days.forEach((d,i)=>{tt+=tasksFor(i).length;const tk=(DB[key(d)]||{}).tk||{};td+=Object.values(tk).filter(Boolean).length});
-  $("kStudy").textContent=td+"/"+tt;
-  $("kPrep").textContent=days.reduce((a,d)=>a+(+((DB[key(d)]||{}).prep)||0),0);
-  let ti=days.findIndex(d=>key(d)===todayKey);if(ti<0)ti=now>END?days.length-1:-1;
-  let st=0,i=ti;if(i>=0&&!(DB[key(days[i])]||{}).run)i--;for(;i>=0&&(DB[key(days[i])]||{}).run;i--)st++;
-  $("kStreak").textContent=st;
-}
+function upd(k,f,v){const r=DB[k]=DB[k]||{};if(v===undefined)delete r[f];else r[f]=v;r._t=Date.now();saveLocal();paintScore(k);renderHero();schedulePush();}
 $("prev").onclick=()=>{if(cur>0){cur--;renderDay()}};
 $("next").onclick=()=>{if(cur<days.length-1){cur++;renderDay()}};
 
-// ---------- sheet ----------
+// ---------- HISAAB ----------
 function renderSheet(){
-  const now=new Date();
-  let h="<tr><th>Date</th>"+ITEMS.map(([,l])=>`<th>${l.split(" ")[0]}</th>`).join("")+"<th>Hrs</th><th>Kg</th><th>2km</th><th>Score</th></tr>";
-  days.forEach((d,i)=>{const r=DB[key(d)],x=r||{},fut=d>now&&!r,s=score(r);
-    h+=`<tr style="cursor:pointer" data-go="${i}"><td>${fmt(d)}</td>`+ITEMS.map(([k])=>`<td>${x[k]?'<span class="ok">✓</span>':fut?'·':'<span class="no">✗</span>'}</td>`).join("")+
-    `<td>${x.prep??""}</td><td>${x.wt??""}</td><td>${x.rt??""}</td><td class="${fut?'':s>=80?'ok':s>=50?'mid':'no'}">${fut?'':s+'%'}</td></tr>`});
+  const S=stats();
+  ring($("bigRing"),S.overall,140,12,"overall");
+  $("kDone").textContent=S.done+"/"+S.past.length;
+  $("kStudy").textContent=S.td+"/"+S.tt;
+  $("kHrs").textContent=S.hrs+" h";
+  $("kIQ").textContent=S.iqD+"/"+S.iqT;
+  $("kWt").textContent=S.wts.length>1?((S.wts[S.wts.length-1]-S.wts[0]>0?"+":"")+(S.wts[S.wts.length-1]-S.wts[0]).toFixed(1)+" kg"):(S.wts[0]?S.wts[0]+" kg":"–");
+  $("kRun").textContent=S.rts.length?Math.min(...S.rts)+" min":"–";
+  $("cats").innerHTML=S.cats.map(([l,v])=>`<div class="cat"><span>${l}</span><div class="bar"><i style="width:${v}%"></i></div><b>${v}%</b></div>`).join("")+
+    `<div class="cat"><span>📚 Study tasks (total)</span><div class="bar"><i style="width:${S.tt?Math.round(S.td/S.tt*100):0}%"></i></div><b>${S.tt?Math.round(S.td/S.tt*100):0}%</b></div>`+
+    `<div class="cat"><span>🎤 Interview ready</span><div class="bar"><i style="width:${Math.round(S.iqD/S.iqT*100)}%"></i></div><b>${Math.round(S.iqD/S.iqT*100)}%</b></div>`;
+  // chart
+  const W=days.length*12,H=130;let svg=`<svg viewBox="0 0 ${W} ${H+18}" preserveAspectRatio="none" role="img" aria-label="Daily score chart">`;
+  [25,50,75,100].forEach(g=>svg+=`<line x1="0" x2="${W}" y1="${H-g/100*H}" y2="${H-g/100*H}" stroke="var(--line)" stroke-width="1"/>`);
+  days.forEach((d,i)=>{const s=score(DB[key(d)]),fut=i>S.ti,h=fut?4:Math.max(3,s/100*H),c=fut?"var(--line)":s>=80?"var(--acc)":s>=50?"var(--warn)":"var(--bad)";
+    svg+=`<rect x="${i*12+2}" y="${H-h}" width="8" height="${h}" rx="3" fill="${c}"><title>${fmt(d)}: ${fut?"baki":s+"%"}</title></rect>`;
+    if(i%7===0)svg+=`<text x="${i*12+2}" y="${H+14}" font-size="10" fill="var(--mute)" font-family="Poppins">W${i/7+1}</text>`;});
+  $("chart").innerHTML=svg+"</svg>";
+  // weekly
+  let wh="<tr><th>Week</th><th>Dates</th><th>Avg score</th><th>Workouts</th><th>Study hrs</th><th>Tasks</th></tr>";
+  for(let w=0;w*7<days.length;w++){const ds=days.slice(w*7,w*7+7),idx=ds.map((_,j)=>w*7+j),past=idx.filter(j=>j<=S.ti);
+    const avg=past.length?Math.round(past.reduce((a,j)=>a+score(DB[key(days[j])]),0)/past.length):null;
+    const wo=past.filter(j=>(DB[key(days[j])]||{}).run).length,hr=idx.reduce((a,j)=>a+(+((DB[key(days[j])]||{}).prep)||0),0);
+    let t1=0,t2=0;idx.forEach(j=>{t2+=tasksFor(j).length;t1+=Object.values((DB[key(days[j])]||{}).tk||{}).filter(Boolean).length});
+    wh+=`<tr><td><b>W${w+1}</b></td><td>${fmt(ds[0]).slice(5)} – ${fmt(ds[ds.length-1]).slice(5)}</td><td class="${avg===null?'':avg>=80?'ok':avg>=50?'mid':'no'}">${avg===null?"–":avg+"%"}</td><td>${past.length?wo+"/"+past.length:"–"}</td><td>${hr||"–"}</td><td>${t1}/${t2}</td></tr>`;}
+  $("wkTbl").innerHTML=wh;
+  // daily
+  let h="<tr><th>Date</th>"+ITEMS.map(([,e])=>`<th>${e}</th>`).join("")+"<th>Hrs</th><th>Kg</th><th>Score</th></tr>";
+  days.forEach((d,i)=>{const r=DB[key(d)],x=r||{},fut=i>S.ti&&!r,s=score(r);
+    h+=`<tr style="cursor:pointer" data-go="${i}"><td>${fmt(d)}</td>`+ITEMS.map(([k])=>`<td>${x[k]?'<span class="ok">✓</span>':fut?'<span class="sub">·</span>':'<span class="no">✗</span>'}</td>`).join("")+
+    `<td>${x.prep??""}</td><td>${x.wt??""}</td><td class="${fut?'':s>=80?'ok':s>=50?'mid':'no'}">${fut?'':s+'%'}</td></tr>`});
   $("tbl").innerHTML=h;
   document.querySelectorAll("[data-go]").forEach(tr=>tr.onclick=()=>{cur=+tr.dataset.go;show("today");renderDay()});
 }
 $("exp").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:"application/json"}));a.download="good_habbits_backup_"+todayKey+".json";a.click()};
-$("imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const o=JSON.parse(t);for(const k in o){o[k]._t=Date.now()}Object.assign(DB,o);saveLocal();renderAll();schedulePush();alert("Restored ✓")}catch(x){alert("Invalid file")}})};
+$("imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const o=JSON.parse(t);for(const k in o){if(o[k]&&typeof o[k]==="object")o[k]._t=Date.now()}Object.assign(DB,o);saveLocal();renderAll();schedulePush();alert("Restored ✓")}catch(x){alert("Invalid file")}})};
 
-// ---------- static tabs ----------
-function renderStatic(){
-  let h="",wk=-1;
+// ---------- STUDY ----------
+function renderStudy(){
+  let h="",wk=-1;const ti=todayIdx();
   days.forEach((d,i)=>{const w=Math.floor(i/7);if(w!==wk){wk=w;h+=`<h3>Week ${w+1}</h3>`}
-    h+=`<details><summary>${fmt(d)}: ${STUDY[i][0]}</summary><ul>${tasksFor(i).map(t=>"<li>"+t+"</li>").join("")}</ul></details>`});
+    const T=tasksFor(i),tk=(DB[key(d)]||{}).tk||{},dn=T.filter((_,j)=>tk[j]).length;
+    h+=`<details ${i===ti?"open":""}><summary><span>${fmt(d)}: ${STUDY[i][0]}</span><span class="${dn===T.length?'ok':'sub'}">${dn}/${T.length}</span></summary><ol class="ex">${T.map((t,j)=>`<li><b style="font-weight:400">${tk[j]?"✅ ":""}${t}</b></li>`).join("")}</ol></details>`});
   $("studyList").innerHTML=h;
-  const li=a=>a.map(x=>"<li>"+x+"</li>").join("");
-  $("wu").innerHTML=li(WARMUP);$("cd").innerHTML=li(COOLDOWN);$("sa").innerHTML=li(STR_A(0));$("sb").innerHTML=li(STR_B(0));
-  let r="<table class='tl'><tr><th>Date</th><th>Workout</th></tr>";
-  days.forEach((d,i)=>{const p=runFor(i);r+=`<tr><td>${fmt(d)}</td><td class="${p.k==='race'?'race':''}">${{run:"🏃",race:"🏁",rest:"🚶",A:"💪",B:"💪"}[p.k]} ${p.t}</td></tr>`});
-  $("runTbl").innerHTML=r+"</table>";
-  const dn=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],ord=[1,2,3,4,5,6,0];
-  $("mealTbl").innerHTML="<tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Snack</th><th>Dinner</th></tr>"+ord.map(j=>`<tr><td>${dn[j]}</td><td>${MEALS[j].b}</td><td>${MEALS[j].l}</td><td>${MEALS[j].s}</td><td>${MEALS[j].d}</td></tr>`).join("");
-  $("juiceTbl").innerHTML=ord.map(j=>`<tr><td><b>${dn[j]}</b></td><td><b>${JUICE[j][0]}</b><br>${JUICE[j][1]}</td></tr>`).join("");
-  document.querySelectorAll("[name=race]").forEach(x=>{x.checked=x.value===raceKey();x.onchange=()=>{DB._settings={race:x.value,_t:Date.now()};saveLocal();renderAll();schedulePush();}});
 }
-function renderAll(){renderStatic();renderDay();if(!$("sheet").classList.contains("hide"))renderSheet();}
 
-// ---------- tabs ----------
-function show(t){document.querySelectorAll("section").forEach(s=>s.classList.toggle("hide",s.id!==t));
-  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));if(t==="sheet")renderSheet();window.scrollTo(0,0);}
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.t));
+// ---------- INTERVIEW ----------
+function renderIQ(){
+  const iq=DB._iq||{};let tot=0,dn=0;
+  $("iqList").innerHTML=IQ.map((c,ci)=>{const d=c.q.filter((_,qi)=>iq[ci+"-"+qi]).length;tot+=c.q.length;dn+=d;
+    return `<div class="card"><h2>${c.cat} <span class="pill">${d}/${c.q.length}</span></h2>`+c.q.map(([q,a],qi)=>{const id=ci+"-"+qi;
+      return `<div class="qa"><div class="row ${iq[id]?"done":""}"><input type="checkbox" data-iq="${id}" id="iq${id}" ${iq[id]?"checked":""}><label for="iq${id}"><b style="font-weight:600">${q}</b></label></div><details style="margin:6px 0 0 34px;padding:6px 10px"><summary style="font-weight:500;font-size:13px">Answer bagh</summary><div style="font-size:13.5px;margin-top:6px">${a}</div></details></div>`}).join("")+"</div>"}).join("");
+  const p=Math.round(dn/tot*100);$("iqPct").textContent=p+"% ("+dn+"/"+tot+")";$("iqBar").style.width=p+"%";
+  document.querySelectorAll("[data-iq]").forEach(c=>c.onchange=e=>{DB._iq=Object.assign({},DB._iq||{},{[c.dataset.iq]:e.target.checked,_t:Date.now()});saveLocal();schedulePush();renderIQ();});
+}
+
+// ---------- BODY + MORE static ----------
+function renderStatic(){
+  $("wu").innerHTML=exList(WARMUP);$("cd").innerHTML=exList(COOLDOWN);$("sa").innerHTML=exList(STR_A(0));$("sb").innerHTML=exList(STR_B(0));
+  let r="<table class='tl'>";const ti=todayIdx();
+  days.forEach((d,i)=>{const p=runFor(i);r+=`<tr ${i===ti?'style="background:var(--acc2)"':''}><td>${fmt(d)}</td><td class="${p.k==='race'?'race':''}">${ICON[p.k]} ${p.t}</td></tr>`});
+  $("runTbl").innerHTML=r+"</table>";
+  const dn=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],ord=[1,2,3,4,5,6,0];
+  $("juiceL").innerHTML=ord.map(j=>`<li><b>${dn[j]}: ${JUICE[j][0]}</b><small>${JUICE[j][1]}</small></li>`).join("");
+  $("bfL").innerHTML=exList(BREAKFAST);
+  $("evL").innerHTML=EVENING.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
+  $("tfL").innerHTML=TIFFIN.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
+  $("hairR").innerHTML=HAIR.routine.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
+  $("hairF").innerHTML=HAIR.food.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
+  $("hairD").innerHTML="🩺 "+HAIR.doctor;
+  document.querySelectorAll("#raceSeg button").forEach(b=>{b.classList.toggle("on",b.dataset.r===raceKey());b.onclick=()=>{DB._settings={race:b.dataset.r,_t:Date.now()};saveLocal();schedulePush();renderAll();}});
+}
+document.querySelectorAll("#bodySeg button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#bodySeg button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".bsec").forEach(s=>s.classList.toggle("hide",s.id!==b.dataset.b));});
+
+let tab="today";
+function renderAll(){renderStatic();renderDay();if(tab==="sheet")renderSheet();if(tab==="study")renderStudy();if(tab==="interview")renderIQ();}
+function show(t){tab=t;document.querySelectorAll("section").forEach(s=>s.classList.toggle("hide",s.id!==t));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+  if(t==="sheet")renderSheet();if(t==="study")renderStudy();if(t==="interview")renderIQ();window.scrollTo(0,0);}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.t));
 
 // ---------- GitHub Gist sync ----------
-function status(s){$("syncS").textContent=s;$("syncInfo").textContent=SY.gist?"Connected · gist "+SY.gist.slice(0,8)+"… · "+s:"Not connected: data is only on this device";}
+function status(s){$("syncS").textContent=s;$("syncInfo").textContent=SY.gist?"✅ Connected · "+s:"❌ Not connected: data is only on this device";}
 async function api(path,opt={}){
   const r=await fetch("https://api.github.com"+path,{method:opt.method||"GET",body:opt.body,cache:"no-store",
     headers:{Authorization:"Bearer "+SY.token,Accept:"application/vnd.github+json",...(opt.body?{"Content-Type":"application/json"}:{})}});
-  if(!r.ok)throw new Error(r.status===401?"Token is wrong or expired":r.status+"");
+  if(!r.ok)throw new Error(r.status===401?"token chukicha/expired":"error "+r.status);
   return r.json();
 }
-function merge(remote){let ch=false;for(const k in remote){const a=DB[k],b=remote[k];if(b&&(!a||(b._t||0)>(a._t||0))){DB[k]=b;ch=true}}return ch}
+function merge(remote){let ch=false;for(const k in remote){const a=DB[k],b=remote[k];if(b&&typeof b==="object"&&(!a||(b._t||0)>(a._t||0))){DB[k]=b;ch=true}}return ch}
 let syncing=false,again=false,tmr;
 async function sync(){
-  if(!SY.token||!SY.gist)return; if(syncing){again=true;return} syncing=true; status("syncing…");
+  if(!SY.token||!SY.gist)return; if(syncing){again=true;return} syncing=true; status("⟳ syncing…");
   try{
     const g=await api("/gists/"+SY.gist),f=g.files[FILE];
     const txt=f?(f.truncated?await (await fetch(f.raw_url)).text():f.content):"{}";
@@ -395,8 +558,8 @@ async function sync(){
     const needPush=Object.keys(DB).some(k=>!remote[k]||(DB[k]._t||0)>(remote[k]._t||0));
     if(needPush) await api("/gists/"+SY.gist,{method:"PATCH",body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(DB)}}})});
     const a=document.activeElement;if(changed&&!(a&&/INPUT|TEXTAREA/.test(a.tagName)&&a.type!=="checkbox"))renderAll();
-    status("✓ synced "+new Date().toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}));
-  }catch(e){status("⚠ sync failed: "+e.message)}
+    status("☁️ synced "+new Date().toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}));
+  }catch(e){status("⚠️ sync: "+e.message)}
   syncing=false;if(again){again=false;sync()}
 }
 function schedulePush(){clearTimeout(tmr);tmr=setTimeout(sync,1500)}
@@ -407,8 +570,8 @@ $("conn").onclick=async()=>{
     let found=null;
     for(let p=1;p<=5&&!found;p++){const g=await api("/gists?per_page=100&page="+p);if(!g.length)break;found=g.find(x=>x.files&&x.files[FILE]);}
     if(!found)found=await api("/gists",{method:"POST",body:JSON.stringify({description:"good_habbits tracker data",public:false,files:{[FILE]:{content:JSON.stringify(DB)}}})});
-    SY.gist=found.id;saveSY();$("tok").value="";await sync();alert("Connected ✓ Now paste the same token on your other device as well.");
-  }catch(e){SY={};saveSY();status("⚠ "+e.message);alert("Connect failed: "+e.message)}
+    SY.gist=found.id;saveSY();$("tok").value="";await sync();alert("Connected ✅ Now connect your other device with the same token.");
+  }catch(e){SY={};saveSY();status("⚠️ "+e.message);alert("Connect failed: "+e.message)}
 };
 $("syncNow").onclick=sync;
 $("disc").onclick=()=>{if(confirm("Disconnect sync on this device? (data stays)")){SY={};saveSY();status("")}};
@@ -416,7 +579,7 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
 setInterval(sync,120000);
 
 // ---------- go ----------
-renderAll();status(SY.gist?"":"");if(!SY.gist)$("syncS").textContent="⚠ sync not set up (⚙ tab)";sync();
+renderAll();status(SY.gist?"":"");if(!SY.gist)$("syncS").textContent="⚠️ sync off (More tab)";sync();
 </script>
 </body>
 </html>
