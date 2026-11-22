@@ -5,257 +5,418 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Good Habbits Tracker</title>
 <style>
-:root{--bg:#f6f5f1;--card:#fff;--ink:#1d1d1b;--mute:#6b6a66;--line:#e4e2dc;--acc:#1f7a4d;--acc2:#e8f3ec;--warn:#b45309;--bad:#b91c1c}
-@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#9b9a94;--line:#33322f;--acc:#4ade80;--acc2:#1b2e22;--warn:#f59e0b;--bad:#f87171}}
+:root{--bg:#f6f5f1;--card:#fff;--ink:#1d1d1b;--mute:#6b6a66;--line:#e4e2dc;--acc:#1f7a4d;--acc2:#e8f3ec;--warn:#b45309;--bad:#b91c1c;--onacc:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#9b9a94;--line:#33322f;--acc:#4ade80;--acc2:#1b2e22;--warn:#f59e0b;--bad:#f87171;--onacc:#0b1a10}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
 .wrap{max-width:900px;margin:0 auto;padding:16px}
-h1{font-size:22px;margin:8px 0 2px}h2{font-size:17px;margin:0 0 10px}
+h1{font-size:21px;margin:8px 0 2px}h2{font-size:17px;margin:0 0 10px}h3{font-size:15px;margin:14px 0 6px}
 .sub{color:var(--mute);font-size:13px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer;font-size:14px}
-.tabs button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-@media (prefers-color-scheme:dark){.tabs button.on{color:#0b1a10}}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:999px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin-top:14px}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
-.kpi b{display:block;font-size:24px}.kpi span{color:var(--mute);font-size:12px}
+.kpi b{display:block;font-size:23px}.kpi span{color:var(--mute);font-size:12px}
 .daynav{display:flex;align-items:center;gap:8px;justify-content:space-between}
-.daynav button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:16px}
+.daynav button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:18px}
 .plan{background:var(--acc2);border-radius:10px;padding:10px 12px;margin:10px 0}
-.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
 .row:last-child{border-bottom:0}
-.row input[type=checkbox]{width:22px;height:22px;accent-color:var(--acc)}
+.row input[type=checkbox]{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--acc)}
 .row label{flex:1}.row small{color:var(--mute);display:block}
-.row input[type=number]{width:70px;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+input[type=number],input[type=password],input[type=text]{padding:7px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+input[type=number]{width:75px}
 textarea{width:100%;min-height:60px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
-.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center}
-th:first-child,td:first-child{text-align:left}
+th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center;vertical-align:top}
+th:first-child,td:first-child{text-align:left;white-space:nowrap}
+.tl td{text-align:left}
 .tw{overflow-x:auto}
 .ok{color:var(--acc);font-weight:600}.no{color:var(--bad)}.mid{color:var(--warn)}
-ul{padding-left:20px;margin:6px 0}li{margin:3px 0}
-.btn{border:1px solid var(--acc);background:transparent;color:var(--acc);padding:7px 12px;border-radius:8px;cursor:pointer;margin:4px 4px 0 0}
+ul,ol{padding-left:20px;margin:6px 0}li{margin:3px 0}
+.btn{border:1px solid var(--acc);background:transparent;color:var(--acc);padding:7px 12px;border-radius:8px;cursor:pointer;margin:4px 4px 0 0;font:inherit;display:inline-block}
+.btn.fill{background:var(--acc);color:var(--onacc)}
 .hide{display:none}
 .race{font-weight:700;color:var(--bad)}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--acc2);color:var(--acc);margin-left:6px}
+#syncS{font-size:12px;color:var(--mute)}
+.warnbox{border-left:4px solid var(--warn);padding:8px 12px;background:var(--acc2);border-radius:6px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>🏃 Good Habbits: 2 km race on 1 January</h1>
-  <div class="sub">Running · vegetarian diet · job switch prep · 10–7 job · sleep by 12 am</div>
+  <h1>🏃 Good Habbits: 24 Nov → 10 Jan</h1>
+  <div class="sub">Running · vegetarian diet · skin · Python/Django job switch · sleep by 12 &nbsp; <span id="syncS"></span></div>
   <div class="tabs">
     <button data-t="today" class="on">Aaj</button>
     <button data-t="sheet">Balance sheet</button>
-    <button data-t="run">Running plan</button>
-    <button data-t="diet">Diet + juice</button>
-    <button data-t="routine">Daily routine</button>
+    <button data-t="study">Study plan</button>
+    <button data-t="run">Run + exercise</button>
+    <button data-t="diet">Diet + juice + skin</button>
+    <button data-t="routine">Routine</button>
+    <button data-t="settings">⚙ Sync / settings</button>
   </div>
 
   <!-- TODAY -->
   <section id="today">
-    <div class="kpis" style="margin-top:14px">
+    <div class="kpis">
       <div class="kpi"><b id="kDays">–</b><span>days to race</span></div>
-      <div class="kpi"><b id="kStreak">–</b><span>run streak (days)</span></div>
-      <div class="kpi"><b id="kScore">–</b><span>average score so far</span></div>
-      <div class="kpi"><b id="kPrep">–</b><span>total job prep hours</span></div>
+      <div class="kpi"><b id="kScore">–</b><span>average habit score</span></div>
+      <div class="kpi"><b id="kStudy">–</b><span>study tasks done</span></div>
+      <div class="kpi"><b id="kPrep">–</b><span>total study hours</span></div>
+      <div class="kpi"><b id="kStreak">–</b><span>workout streak</span></div>
     </div>
     <div class="card">
-      <div class="daynav"><button id="prev">‹</button><h2 id="dTitle" style="margin:0"></h2><button id="next">›</button></div>
-      <div class="plan" id="dPlan"></div>
+      <div class="daynav"><button id="prev">‹</button><h2 id="dTitle" style="margin:0;text-align:center"></h2><button id="next">›</button></div>
+      <div id="dBody"></div>
+      <h3>✅ Daily habits</h3>
       <div id="checks"></div>
-      <div class="row"><label>Job prep hours<small>DSA / interview / resume / applications</small></label><input type="number" id="prep" min="0" max="8" step="0.5"></div>
-      <div class="row"><label>Weight (kg)<small>Optional; fill in once a week</small></label><input type="number" id="wt" min="30" max="200" step="0.1"></div>
-      <div style="margin-top:10px"><textarea id="note" placeholder="Note: how was the run, how do you feel, what did you study..."></textarea></div>
-      <div style="margin-top:10px"><div class="sub">Today's score: <b id="dScore">0%</b></div><div class="bar"><i id="dBar" style="width:0"></i></div></div>
+      <div class="row"><label>Study hours today<small>Morning DSA + evening topic</small></label><input type="number" id="prep" min="0" max="12" step="0.5"></div>
+      <div class="row"><label>Weight (kg)<small>Fill in every Sunday morning</small></label><input type="number" id="wt" min="30" max="200" step="0.1"></div>
+      <div class="row"><label>2 km time (min)<small>Fill in on time-trial days</small></label><input type="number" id="rt" min="5" max="40" step="0.1"></div>
+      <div style="margin-top:10px"><textarea id="note" placeholder="Note: how was the run, how do you feel, which questions did you get stuck on..."></textarea></div>
+      <div style="margin-top:10px"><div class="sub">Today's habit score: <b id="dScore">0%</b></div><div class="bar"><i id="dBar" style="width:0"></i></div></div>
     </div>
   </section>
 
   <!-- SHEET -->
   <section id="sheet" class="hide">
     <div class="card">
-      <h2>Balance sheet: 24 Nov to 1 Jan</h2>
+      <h2>Balance sheet</h2>
+      <div class="sub" style="margin-bottom:8px">Tap any row to open that day.</div>
       <div class="tw"><table id="tbl"></table></div>
       <div style="margin-top:12px">
         <button class="btn" id="exp">⬇ Backup (JSON)</button>
         <label class="btn">⬆ Restore<input type="file" id="imp" accept=".json" hidden></label>
       </div>
-      <div class="sub" style="margin-top:6px">Your data is saved in this browser only. Use the same phone or browser every day, and download a backup once a week.</div>
+    </div>
+  </section>
+
+  <!-- STUDY -->
+  <section id="study" class="hide">
+    <div class="card">
+      <h2>📚 Study plan: Python (2 yrs) → strong Django backend developer</h2>
+      <p class="sub">Every morning 8:30–9:15: 2 DSA problems. Every evening 9:00–11:00: the topic below. Weekends: project + applications. Project <b>ShopLite</b> (Django + DRF + PostgreSQL + Redis + Celery + Docker + tests + live deploy) is the centrepiece of your resume.</p>
+      <div class="sub">Weeks: 1–2 Advanced Python · 3 SQL · 4 Django ORM · 5 Django internals + DRF · 6 Deploy + system design · 7 Revision + mocks</div>
+      <div id="studyList"></div>
     </div>
   </section>
 
   <!-- RUN -->
   <section id="run" class="hide">
     <div class="card">
-      <h2>Running plan (beginner → 2 km)</h2>
-      <p class="sub">Every run starts with a 5 min brisk walk plus dynamic stretches (leg swings, high knees). It ends with a 5 min walk and 5 min of stretches. Run at a pace where you can still talk. Pain is a stop sign; normal soreness is fine.</p>
-      <div id="runTbl"></div>
+      <h2>🏃 Running + exercise</h2>
+      <p class="sub">Run days: Mon/Wed/Fri/Sat. Strength: Tue (A) / Thu (B). Sunday: rest + walk. Run at a pace where you can still talk. <b>Sharp pain in a knee, shin or ankle = stop, and walk that day.</b> Normal soreness is fine.</p>
+      <details><summary>Warm-up before every run (8 min)</summary><ol id="wu"></ol></details>
+      <details><summary>Cool-down after every workout (8 min)</summary><ol id="cd"></ol></details>
+      <details><summary>Strength A (Tuesday)</summary><ol id="sa"></ol><div class="sub">Reps increase in weeks 3 and 5. The "Aaj" page always shows that day's exact reps.</div></details>
+      <details><summary>Strength B (Thursday)</summary><ol id="sb"></ol></details>
+      <h3>Day-by-day</h3>
+      <div class="tw" id="runTbl"></div>
     </div>
   </section>
 
   <!-- DIET -->
   <section id="diet" class="hide">
     <div class="card">
-      <h2>Vegetarian diet</h2>
+      <h2>🥗 Vegetarian diet (stamina + skin)</h2>
       <ul>
-        <li><b>6:45 am, on waking:</b> 1 glass of warm water + 5 soaked almonds + 2 walnuts</li>
-        <li><b>Before the run (if you feel hungry):</b> half a banana</li>
-        <li><b>8:00 am, after the run:</b> <i>Juice/smoothie</i> (see below) + breakfast: 2 besan/moong chillas, OR poha with peanuts, OR oats upma, OR 2 paneer parathas with curd</li>
-        <li><b>1:00 pm lunch (tiffin):</b> 2 rotis + dal/rajma/chole + sabzi + salad + curd</li>
-        <li><b>4:30 pm snack:</b> roasted chana / sprouts chaat / fruit / buttermilk. No samosas or biscuits.</li>
-        <li><b>8:30 pm dinner:</b> light. 1–2 rotis + paneer/soya/dal + sabzi, OR khichdi + curd. Eat at least 2.5 hours before sleeping.</li>
-        <li><b>10:30 pm (optional):</b> a glass of haldi doodh (turmeric milk)</li>
-        <li><b>Water:</b> 3 litres a day. Keep a bottle on your office desk.</li>
-        <li><b>Protein every day:</b> paneer, dal, curd, sprouts, soya chunks, peanuts. Aim for 60–70 g.</li>
-        <li><b>Cut down:</b> sugar, cold drinks, maida, fried food, late-night snacking</li>
+        <li><b>6:45 am:</b> 1 glass of warm water + 5 soaked almonds + 2 walnuts + 1 tsp soaked chia/flax seeds</li>
+        <li><b>Before the run (only if hungry):</b> half a banana or 2 dates</li>
+        <li><b>8:00 am:</b> juice of the day + breakfast</li>
+        <li><b>1:00 pm:</b> lunch (tiffin) · <b>4:30 pm:</b> snack · <b>8:30 pm:</b> dinner (2.5 hours before sleep)</li>
+        <li><b>10:30 pm (optional):</b> haldi doodh (a pinch of turmeric + black pepper)</li>
+        <li><b>Water:</b> 3 litres. Finish 1 litre by 11 am, 2 litres by 4 pm.</li>
+        <li><b>Protein target: 60–70 g a day.</b> Paneer 100 g ≈ 18 g · soya 50 g dry ≈ 25 g · dal 1 bowl ≈ 9 g · curd 1 bowl ≈ 6 g · milk 1 glass ≈ 8 g · sprouts 1 bowl ≈ 10 g</li>
+        <li><b>Cut out:</b> sugar/sweets, cold drinks, packaged juice, maida, fried snacks, late-night snacking. Limit chai to 2 cups (no sugar or less).</li>
       </ul>
+      <h3>7-day menu</h3>
+      <div class="tw"><table class="tl" id="mealTbl"></table></div>
     </div>
     <div class="card">
-      <h2>🥤 Blender/juicer menu (rotate daily)</h2>
+      <h2>🥤 Juice of the day (blender/juicer)</h2>
+      <div class="tw"><table class="tl" id="juiceTbl"></table></div>
+      <p class="sub">Don't strain the blender ones (fibre is good for you). No sugar. Drink fresh. Don't drink juice on an empty stomach if you get acidity; have 2–3 almonds first.</p>
+    </div>
+    <div class="card">
+      <h2>✨ Pigmentation: what actually works</h2>
+      <div class="warnbox">Honest truth: <b>juice alone will not remove pigmentation.</b> What fades it most is <b>sunscreen every day</b> plus a simple routine. Diet and juice help from the inside. You'll see a visible improvement in 6–8 weeks, and pigmentation fades fully over 3–6 months. If the patches are brownish and symmetrical on the cheeks or forehead (possible melasma), or there's no change in 6–8 weeks, <b>see a dermatologist once</b>. They can prescribe proper creams.</div>
+      <h3>☀️ Morning (after bath, 2 min)</h3>
+      <ol>
+        <li>Gentle face wash (no scrubbing)</li>
+        <li>Niacinamide 5% serum OR vitamin C serum (2–3 drops)</li>
+        <li>Light moisturizer</li>
+        <li><b>Sunscreen SPF 50, PA+++</b>: two finger-lengths for face + neck. <b>Reapply at 1:30 pm</b> in the office as well (sunlight from windows counts too)</li>
+      </ol>
+      <h3>🌙 Night (11:15 pm, 2 min)</h3>
+      <ol>
+        <li>Face wash (wash twice if you wore sunscreen)</li>
+        <li>Niacinamide 5% serum</li>
+        <li>Moisturizer</li>
+      </ol>
+      <h3>🍊 Foods for skin (include every day)</h3>
       <ul>
-        <li><b>Mon/Thu, ABC juice:</b> 1 apple + 1 beetroot + 2 carrots + a little ginger (stamina, iron)</li>
-        <li><b>Tue/Fri, banana-peanut smoothie:</b> 1 banana + 1 tbsp peanut butter or 10 peanuts + 1 glass milk + 1 tbsp oats (recovery, protein)</li>
-        <li><b>Wed/Sat, green juice:</b> spinach + cucumber + 1 apple + lemon + mint</li>
-        <li><b>Sun, amla-carrot:</b> 2 amla + 2 carrots + ginger + a little honey (immunity in winter)</li>
-        <li><b>Afternoon at office:</b> buttermilk with jeera</li>
+        <li><b>Vitamin C:</b> 1 amla / 1 orange / 1 guava / lemon in dal. Reduces melanin and helps collagen</li>
+        <li><b>Lycopene:</b> cooked tomato (sabzi/soup), protects against sun damage</li>
+        <li><b>Beta-carotene:</b> carrot, papaya, pumpkin</li>
+        <li><b>Vitamin E + zinc:</b> 5 almonds + 1 tbsp pumpkin seeds + 1 tbsp sunflower seeds</li>
+        <li><b>Omega-3:</b> 2 walnuts + 1 tsp flax/chia</li>
+        <li><b>Green tea:</b> 1–2 cups (instead of a sugary chai)</li>
+        <li><b>Avoid:</b> sugar, fried food, too much milk-sweet stuff. Sleep by 12 (skin repairs at night)</li>
       </ul>
-      <p class="sub">Don't strain the juice; the fibre is good for you. Drink it fresh, within 15 minutes.</p>
+      <h3>❌ Don't do</h3>
+      <ul><li>Lemon / baking soda / toothpaste directly on the face</li><li>Scrubbing daily, picking pimples</li><li>Going out in the sun without sunscreen or a cap</li><li>Using several new products at once (patch test first)</li></ul>
+      <p class="sub">Progress check: every Sunday take a face photo in the same spot, same light, no filter. Compare week 1 vs week 7.</p>
     </div>
   </section>
 
   <!-- ROUTINE -->
   <section id="routine" class="hide">
     <div class="card">
-      <h2>Daily routine (10–7 job, sleep at 12)</h2>
-      <table>
-        <tr><td>6:45 am</td><td style="text-align:left">Wake up, water, almonds</td></tr>
-        <tr><td>7:00 – 7:45</td><td style="text-align:left">🏃 Run / walk / stretch (per the plan)</td></tr>
-        <tr><td>7:45 – 8:30</td><td style="text-align:left">Juice + breakfast + bath</td></tr>
-        <tr><td>8:30 – 9:15</td><td style="text-align:left">📚 Job prep slot 1 (DSA, 1–2 problems)</td></tr>
-        <tr><td>9:15 – 10:00</td><td style="text-align:left">Commute (podcast or system design video)</td></tr>
-        <tr><td>10:00 – 7:00</td><td style="text-align:left">Office. Lunch at 1, snack at 4:30, water bottle</td></tr>
-        <tr><td>7:00 – 8:30</td><td style="text-align:left">Commute + freshen up + 10 min walk</td></tr>
-        <tr><td>8:30 – 9:00</td><td style="text-align:left">Dinner</td></tr>
-        <tr><td>9:00 – 11:00</td><td style="text-align:left">📚 Job prep slot 2 (apply, resume, interview prep, projects)</td></tr>
-        <tr><td>11:00 – 11:45</td><td style="text-align:left">Phone off, plan tomorrow, fill in this tracker</td></tr>
-        <tr><td>12:00 am</td><td style="text-align:left">😴 Sleep (6h45m. Weekends: sleep 8h)</td></tr>
+      <h2>⏰ Weekday routine (10–7 job)</h2>
+      <table class="tl">
+        <tr><td>6:45</td><td>Wake up, water + almonds + seeds</td></tr>
+        <tr><td>7:00–7:45</td><td>🏃 Workout per plan (warm-up → main → cool-down)</td></tr>
+        <tr><td>7:45–8:30</td><td>Bath + morning skincare + juice + breakfast</td></tr>
+        <tr><td>8:30–9:15</td><td>📚 2 DSA problems</td></tr>
+        <tr><td>9:15–10:00</td><td>Commute (listen to a tech podcast or system design video)</td></tr>
+        <tr><td>10:00–7:00</td><td>Office · 1 pm lunch · 1:30 sunscreen again · 4:30 snack · water bottle on the desk</td></tr>
+        <tr><td>7:00–8:30</td><td>Commute + freshen up + 10 min walk</td></tr>
+        <tr><td>8:30–9:00</td><td>Dinner</td></tr>
+        <tr><td>9:00–11:00</td><td>📚 Study the day's topic (phone in another room)</td></tr>
+        <tr><td>11:00–11:15</td><td>Fill in the tracker, look at tomorrow's plan, lay out running clothes</td></tr>
+        <tr><td>11:15–11:45</td><td>Night skincare + haldi doodh + no screen</td></tr>
+        <tr><td>12:00</td><td>😴 Sleep (6h45m)</td></tr>
       </table>
-      <p class="sub">Job prep target: 2–2.5 hours on weekdays and 4–5 hours on weekends. Every Sunday: apply to 10 jobs and update your LinkedIn/Naukri profile.</p>
+      <h3>Weekend</h3>
+      <table class="tl">
+        <tr><td>7:30</td><td>Wake up (Sunday 8:00). Saturday = long run</td></tr>
+        <tr><td>10:00–1:00</td><td>📚 Project / study block 1</td></tr>
+        <tr><td>4:00–6:00</td><td>📚 Block 2: applications, referrals, mock interview</td></tr>
+        <tr><td>Sunday evening</td><td>Weekly review: weight, face photo, look at the balance sheet, plan next week</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settings" class="hide">
+    <div class="card">
+      <h2>🔄 Sync across devices (one-time setup)</h2>
+      <p>Your data is saved in a <b>private GitHub Gist</b>. Do these steps <b>once on each device</b> (phone + laptop), using the same token:</p>
+      <ol>
+        <li>Open <a href="https://github.com/settings/tokens/new?scopes=gist&description=good_habbits_sync" target="_blank" rel="noopener">this link</a> (log in to GitHub) → set Expiration to "No expiration" or 90 days → only <b>gist</b> is ticked → <b>Generate token</b></li>
+        <li>Copy the token (starts with <code>ghp_</code>). Keep it in WhatsApp "message yourself" / notes so you can paste it on your other device</li>
+        <li>Paste it below → <b>Connect</b>. Do the same on your other device. Done ✅</li>
+      </ol>
+      <input type="password" id="tok" placeholder="ghp_..." style="width:100%;max-width:420px">
+      <div><button class="btn fill" id="conn">Connect</button><button class="btn" id="syncNow">Sync now</button><button class="btn" id="disc">Disconnect</button></div>
+      <p class="sub" id="syncInfo"></p>
+      <p class="sub">The token stays only in this browser and can only access gists (not your code). Sync runs automatically whenever you tick something, open the app, or every 2 minutes.</p>
+    </div>
+    <div class="card">
+      <h2>🏁 Race date</h2>
+      <label><input type="radio" name="race" value="2027-01-01"> 1 January</label> &nbsp;
+      <label><input type="radio" name="race" value="2027-01-10"> 10 January</label>
+      <p class="sub">The running plan adjusts automatically (the last 3 days before the race are taper/rest).</p>
     </div>
   </section>
 </div>
 
+<script src="data.js"></script>
 <script>
-// ---------- Plan data ----------
-const START = new Date(2026,10,24);
-const RACE_DAY = new Date(2027,0,1);
-const days=[];for(let d=new Date(START);d<=RACE_DAY;d.setDate(d.getDate()+1))days.push(new Date(d));
+// ---------- dates ----------
+const START=new Date(2026,10,24), END=new Date(2027,0,10);
+const days=[];for(let d=new Date(START);d<=END;d.setDate(d.getDate()+1))days.push(new Date(d));
 const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const fmt=d=>d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
+const $=id=>document.getElementById(id);
+const todayKey=key(new Date());
 
-// Run plan by date index (0 = 24 Nov, Tue)
+// ---------- storage ----------
+const LS="gh_tracker_v1",SK="gh_sync_v1",FILE="good_habbits_data.json";
+let DB={},SY={};
+try{DB=JSON.parse(localStorage.getItem(LS))||{}}catch(e){}
+try{SY=JSON.parse(localStorage.getItem(SK))||{}}catch(e){}
+const saveLocal=()=>{try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}};
+const saveSY=()=>{try{localStorage.setItem(SK,JSON.stringify(SY))}catch(e){}};
+
+const raceKey=()=>(DB._settings&&DB._settings.race)||"2027-01-10";
+const raceIdx=()=>days.findIndex(d=>key(d)===raceKey());
+const RACE_DATE=()=>days[raceIdx()];
+
+// ---------- running plan ----------
+const RUNW=[
+ {e:"Walk-run: 1 min jog / 2 min walk × 6 (18 min)",s:"20 min walk-run: 1 min jog / 1 min walk × 10"},
+ {e:"Walk-run: 2 min jog / 1 min walk × 6 (18 min)",s:"1 km continuous jog + 1 km walk-run"},
+ {e:"Walk-run: 4 min jog / 1 min walk × 4 (20 min)",s:"1.5 km continuous jog 💪"},
+ {e:"1.5 km continuous jog + 1 min walk + 500 m jog",s:"2 km with 1 short walk break"},
+ {e:"2 km continuous jog 🎯 (slow, no stopping)",s:"2 km TIME TRIAL ⏱ (enter your time in '2 km time')"},
+ {e:"2–2.5 km easy jog",w:"Speed: 6 × 200 m fast + 200 m walk between (after warm-up)",s:"3 km easy (so that 2 km feels easy)"},
+ {e:"2 km steady",w:"Speed: 4 × 400 m at race pace + 2 min walk between",s:"2 km TIME TRIAL ⏱ (compare with week 5)"}
+];
 function runFor(i){
-  const d=days[i], dow=d.getDay(); // 0 Sun
-  if(i===days.length-1) return {t:"🏁 RACE DAY: 2 km! Start easy, push in the last 500 m. Breakfast 2 hours before: banana + toast.",run:true,race:true};
-  if(i>=days.length-4){ // Dec 29,30,31
-    return [{t:"Easy 1 km jog + 4 × 50 m strides",run:true},{t:"Rest / 15 min walk",run:false},{t:"Rest. Prepare kit, water, sleep early 🎽",run:false}][i-(days.length-4)];
-  }
-  const wk=Math.floor(i/7); // 0..4
-  const runDays=[1,3,5,6]; // Mon Wed Fri Sat  (Tue first day handled)
-  const isRun = i===0 ? true : runDays.includes(dow);
-  if(!isRun) return dow===0?{t:"Rest + 30 min walk + stretching. Weekly review 📊",run:false}:{t:"Cross-train: 20 min brisk walk + 10 min core (plank, squats, lunges)",run:false};
-  const W=[
-    "Walk-run: 1 min jog / 2 min walk × 6 (18 min)",
-    "Walk-run: 2 min jog / 1 min walk × 6 (18 min)",
-    "Walk-run: 4 min jog / 1 min walk × 4 (20 min)",
-    "Continuous 1.5 km jog, then 1 min walk, then 500 m",
-    "Continuous 2 km jog 🎯 (no stopping)",
-    "Continuous 2 km jog, last 300 m a bit faster"
-  ];
-  let t=W[Math.min(wk,5)];
-  if(dow===6){ // Saturday long-ish
-    t=["20 min walk-run (1 jog / 1 walk)","Try 1 km continuous + 1 km walk-run","Continuous 1.5 km 💪","2 km with 1 short walk break","2 km time trial ⏱ (note your time)","2 km easy"][Math.min(wk,5)];
-  }
-  return {t,run:true};
+  const R=raceIdx(),d=days[i],dow=d.getDay(),w=Math.floor(i/7);
+  if(i===R) return {k:"race",t:"🏁 RACE DAY, 2 km! Breakfast 2 hours before (banana + toast/poha). Warm up 10 min. Start slower than you want, then push in the last 500 m."};
+  if(i>R){ if(i===R+1) return {k:"rest",t:"Recovery: 20 min walk + stretching. Congratulations 🎉"};
+    if([1,3,5,6].includes(dow)) return {k:"run",t:"Easy 2–3 km run (keep the habit going)"};
+    if(dow===0) return {k:"rest",t:"Rest day: 30 min walk + stretching"};
+    return {k:dow===2?"A":"B",t:"Strength "+(dow===2?"A":"B")+" + 10 min brisk walk"}; }
+  if(i>=R-3) return [{k:"run",t:"Easy 1 km jog + 4 × 50 m strides (quick, relaxed)"},{k:"rest",t:"Rest: 15 min walk + stretching. Eat well, drink lots of water"},{k:"rest",t:"Full rest. Lay out your shoes/kit, carb-rich dinner (rice/roti), sleep by 11 🎽"}][i-(R-3)];
+  if(dow===0) return {k:"rest",t:"Rest day: 30 min easy walk + the full cool-down stretches"};
+  if(i>0&&dow===2) return {k:"A",t:"Strength A + 10 min brisk walk"};
+  if(dow===4) return {k:"B",t:"Strength B + 10 min brisk walk"};
+  const W=RUNW[Math.min(w,6)];
+  return {k:"run",t:dow===6?W.s:(dow===3&&W.w)?W.w:W.e};
 }
-const juice=["Amla-carrot","ABC juice","Banana-peanut smoothie","Green juice","ABC juice","Banana-peanut smoothie","Green juice"];
+function exerciseHTML(i){
+  const p=runFor(i),w=Math.floor(i/7),li=a=>"<ol>"+a.map(x=>"<li>"+x+"</li>").join("")+"</ol>";
+  let h=`<b>${p.k==="race"?"<span class='race'>"+p.t+"</span>":p.t}</b>`;
+  if(p.k==="run"||p.k==="race") h+=`<details><summary>Warm-up (8 min)</summary>${li(WARMUP)}</details><details><summary>Cool-down (8 min)</summary>${li(COOLDOWN)}</details>`;
+  else if(p.k==="A"||p.k==="B") h+=`<details open><summary>Strength ${p.k}: exact reps (rest 45 sec between sets)</summary>${li((p.k==="A"?STR_A:STR_B)(w))}</details><details><summary>Cool-down</summary>${li(COOLDOWN)}</details>`;
+  else h+=`<details><summary>Stretches</summary>${li(COOLDOWN)}</details>`;
+  return h;
+}
 
-// ---------- Storage ----------
-const LS="gh_tracker_v1";
-let DB={};try{DB=JSON.parse(localStorage.getItem(LS))||{}}catch(e){DB={}}
-const save=()=>{try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}};
-
+// ---------- habits ----------
 const ITEMS=[
-  ["run","🏃 Run / workout per plan","Includes warm-up + cool-down"],
-  ["juice","🥤 Juice / smoothie",""],
-  ["diet","🥗 Healthy meals","No junk, protein in every meal"],
+  ["run","🏃 Workout per plan","Warm-up + main + cool-down"],
+  ["juice","🥤 Juice of the day",""],
+  ["diet","🥗 Clean diet + protein","No sugar, junk or maida"],
   ["water","💧 3 L water",""],
-  ["prepdone","📚 Job prep 2+ hours",""],
-  ["sleep","😴 In bed by 12 am","Phone off at 11:45"]
+  ["study","📚 All study tasks done","Ticks itself when every task above is done"],
+  ["skin","✨ Sunscreen AM (+1:30 pm) & PM routine",""],
+  ["sleep","😴 In bed by 12 am","Phone away at 11:45"]
 ];
 const score=r=>r?Math.round(ITEMS.filter(([k])=>r[k]).length/ITEMS.length*100):0;
+const tasksFor=i=>dsaFor(i).concat(STUDY[i][1]);
 
-// ---------- Today ----------
-const todayKey=key(new Date());
-let cur=Math.max(0,Math.min(days.length-1,days.findIndex(d=>key(d)===todayKey)));
-if(new Date()<START)cur=0;
+// ---------- today ----------
+let cur=days.findIndex(d=>key(d)===todayKey);
+if(cur<0)cur=new Date()<START?0:days.length-1;
 
 function renderDay(){
-  const d=days[cur],k=key(d),r=DB[k]||{},p=runFor(cur);
-  document.getElementById("dTitle").textContent=fmt(d)+(k===todayKey?" (aaj)":"");
-  document.getElementById("dPlan").innerHTML=`<b>Run:</b> <span class="${p.race?'race':''}">${p.t}</span><br><b>Juice:</b> ${juice[d.getDay()]}`;
-  document.getElementById("checks").innerHTML=ITEMS.map(([id,l,s])=>{
-    const lab=id==="run"&&!p.run?"🚶 Rest/walk day per plan":l;
-    return `<div class="row"><input type="checkbox" id="c_${id}" ${r[id]?"checked":""}><label for="c_${id}">${lab}${s?`<small>${s}</small>`:""}</label></div>`}).join("");
-  ITEMS.forEach(([id])=>document.getElementById("c_"+id).onchange=e=>{upd(k,id,e.target.checked)});
-  const prep=document.getElementById("prep"),wt=document.getElementById("wt"),note=document.getElementById("note");
-  prep.value=r.prep??"";wt.value=r.wt??"";note.value=r.note??"";
-  prep.oninput=e=>{upd(k,"prep",e.target.value===""?undefined:+e.target.value);if(+e.target.value>=2&&!DB[k].prepdone){upd(k,"prepdone",true);renderDay()}};
-  wt.oninput=e=>upd(k,"wt",e.target.value===""?undefined:+e.target.value);
-  note.oninput=e=>upd(k,"note",e.target.value);
-  const s=score(r);document.getElementById("dScore").textContent=s+"%";document.getElementById("dBar").style.width=s+"%";
-  kpis();
+  const i=cur,d=days[i],k=key(d),r=DB[k]||{},dow=d.getDay(),J=JUICE[dow],M=MEALS[dow],T=tasksFor(i),tk=r.tk||{};
+  $("dTitle").textContent=fmt(d)+(k===todayKey?" · aaj":"")+"  (day "+(i+1)+"/"+days.length+")";
+  const done=T.filter((_,j)=>tk[j]).length;
+  $("dBody").innerHTML=`
+   <div class="plan"><h3 style="margin-top:0">🏃 Exercise</h3>${exerciseHTML(i)}</div>
+   <div class="plan"><h3 style="margin-top:0">📚 Study: ${STUDY[i][0]} <span class="pill">${done}/${T.length}</span></h3>
+     ${T.map((t,j)=>`<div class="row"><input type="checkbox" data-tk="${j}" id="tk${j}" ${tk[j]?"checked":""}><label for="tk${j}">${t}</label></div>`).join("")}</div>
+   <div class="plan"><h3 style="margin-top:0">🥤 Juice: ${J[0]}</h3>${J[1]}</div>
+   <div class="plan"><h3 style="margin-top:0">🍽 Meals</h3>
+     <b>Breakfast:</b> ${M.b}<br><b>Lunch:</b> ${M.l}<br><b>4:30 snack:</b> ${M.s}<br><b>Dinner:</b> ${M.d}</div>`;
+  document.querySelectorAll("[data-tk]").forEach(c=>c.onchange=e=>{
+    const rr=DB[k]=DB[k]||{};rr.tk=rr.tk||{};rr.tk[c.dataset.tk]=e.target.checked;
+    const all=T.every((_,j)=>rr.tk[j]);upd(k,"study",all);renderDay();});
+  $("checks").innerHTML=ITEMS.map(([id,l,s])=>`<div class="row"><input type="checkbox" id="c_${id}" ${r[id]?"checked":""}><label for="c_${id}">${l}${s?`<small>${s}</small>`:""}</label></div>`).join("");
+  ITEMS.forEach(([id])=>$("c_"+id).onchange=e=>upd(k,id,e.target.checked));
+  $("prep").value=r.prep??"";$("wt").value=r.wt??"";$("rt").value=r.rt??"";$("note").value=r.note??"";
+  $("prep").oninput=e=>upd(k,"prep",e.target.value===""?undefined:+e.target.value);
+  $("wt").oninput=e=>upd(k,"wt",e.target.value===""?undefined:+e.target.value);
+  $("rt").oninput=e=>upd(k,"rt",e.target.value===""?undefined:+e.target.value);
+  $("note").oninput=e=>upd(k,"note",e.target.value);
+  paintScore(k);kpis();
 }
-function upd(k,f,v){DB[k]=DB[k]||{};if(v===undefined)delete DB[k][f];else DB[k][f]=v;save();
-  const s=score(DB[k]);document.getElementById("dScore").textContent=s+"%";document.getElementById("dBar").style.width=s+"%";kpis();}
+function paintScore(k){const s=score(DB[k]);$("dScore").textContent=s+"%";$("dBar").style.width=s+"%";}
+function upd(k,f,v){const r=DB[k]=DB[k]||{};if(v===undefined)delete r[f];else r[f]=v;r._t=Date.now();saveLocal();paintScore(k);kpis();schedulePush();}
 function kpis(){
   const now=new Date();now.setHours(0,0,0,0);
-  document.getElementById("kDays").textContent=Math.max(0,Math.round((RACE_DAY-now)/864e5));
-  // streak: consecutive past days (up to today) where plan was followed (run checked)
-  let ti=days.findIndex(d=>key(d)===todayKey);if(ti<0)ti=now>RACE_DAY?days.length-1:-1;
+  $("kDays").textContent=Math.max(0,Math.round((RACE_DATE()-now)/864e5));
+  const past=days.filter(d=>d<=now);
+  $("kScore").textContent=(past.length?Math.round(past.reduce((a,d)=>a+score(DB[key(d)]),0)/past.length):0)+"%";
+  let td=0,tt=0;days.forEach((d,i)=>{tt+=tasksFor(i).length;const tk=(DB[key(d)]||{}).tk||{};td+=Object.values(tk).filter(Boolean).length});
+  $("kStudy").textContent=td+"/"+tt;
+  $("kPrep").textContent=days.reduce((a,d)=>a+(+((DB[key(d)]||{}).prep)||0),0);
+  let ti=days.findIndex(d=>key(d)===todayKey);if(ti<0)ti=now>END?days.length-1:-1;
   let st=0,i=ti;if(i>=0&&!(DB[key(days[i])]||{}).run)i--;for(;i>=0&&(DB[key(days[i])]||{}).run;i--)st++;
-  document.getElementById("kStreak").textContent=st;
-  const past=days.filter(d=>d<=now);const avg=past.length?Math.round(past.reduce((a,d)=>a+score(DB[key(d)]),0)/past.length):0;
-  document.getElementById("kScore").textContent=avg+"%";
-  document.getElementById("kPrep").textContent=Object.values(DB).reduce((a,r)=>a+(+r.prep||0),0);
+  $("kStreak").textContent=st;
 }
-document.getElementById("prev").onclick=()=>{if(cur>0){cur--;renderDay()}};
-document.getElementById("next").onclick=()=>{if(cur<days.length-1){cur++;renderDay()}};
+$("prev").onclick=()=>{if(cur>0){cur--;renderDay()}};
+$("next").onclick=()=>{if(cur<days.length-1){cur++;renderDay()}};
 
-// ---------- Sheet ----------
+// ---------- sheet ----------
 function renderSheet(){
   const now=new Date();
-  let h="<tr><th>Date</th>"+ITEMS.map(([,l])=>`<th>${l.split(" ")[0]}</th>`).join("")+"<th>Prep h</th><th>Score</th></tr>";
-  days.forEach((d,i)=>{const r=DB[key(d)]||{},fut=d>now,s=score(r);
-    h+=`<tr style="cursor:pointer" onclick="cur=${i};show('today');renderDay()"><td>${fmt(d)}</td>`+ITEMS.map(([k])=>`<td>${r[k]?'<span class="ok">✓</span>':fut?'·':'<span class="no">✗</span>'}</td>`).join("")+
-    `<td>${r.prep??"–"}</td><td class="${fut&&!DB[key(d)]?'':s>=80?'ok':s>=50?'mid':'no'}">${fut&&!DB[key(d)]?'':s+'%'}</td></tr>`});
-  document.getElementById("tbl").innerHTML=h;
+  let h="<tr><th>Date</th>"+ITEMS.map(([,l])=>`<th>${l.split(" ")[0]}</th>`).join("")+"<th>Hrs</th><th>Kg</th><th>2km</th><th>Score</th></tr>";
+  days.forEach((d,i)=>{const r=DB[key(d)],x=r||{},fut=d>now&&!r,s=score(r);
+    h+=`<tr style="cursor:pointer" data-go="${i}"><td>${fmt(d)}</td>`+ITEMS.map(([k])=>`<td>${x[k]?'<span class="ok">✓</span>':fut?'·':'<span class="no">✗</span>'}</td>`).join("")+
+    `<td>${x.prep??""}</td><td>${x.wt??""}</td><td>${x.rt??""}</td><td class="${fut?'':s>=80?'ok':s>=50?'mid':'no'}">${fut?'':s+'%'}</td></tr>`});
+  $("tbl").innerHTML=h;
+  document.querySelectorAll("[data-go]").forEach(tr=>tr.onclick=()=>{cur=+tr.dataset.go;show("today");renderDay()});
 }
-document.getElementById("exp").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:"application/json"}));a.download="good_habbits_backup_"+todayKey+".json";a.click()};
-document.getElementById("imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{DB=JSON.parse(t);save();renderSheet();renderDay();alert("Restored ✓")}catch(x){alert("Invalid file")}})};
+$("exp").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:"application/json"}));a.download="good_habbits_backup_"+todayKey+".json";a.click()};
+$("imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const o=JSON.parse(t);for(const k in o){o[k]._t=Date.now()}Object.assign(DB,o);saveLocal();renderAll();schedulePush();alert("Restored ✓")}catch(x){alert("Invalid file")}})};
 
-// ---------- Run table ----------
-(function(){let h="<table><tr><th>Date</th><th style='text-align:left'>Plan</th></tr>";
-  days.forEach((d,i)=>{const p=runFor(i);if(d.getDay()===1&&i>0)h+="<tr><td colspan=2 style='background:var(--acc2);text-align:left'><b>Week "+(Math.floor(i/7)+1)+"</b></td></tr>";
-    h+=`<tr><td>${fmt(d)}</td><td style="text-align:left" class="${p.race?'race':''}">${p.run?'🏃 ':'🚶 '}${p.t}</td></tr>`});
-  document.getElementById("runTbl").innerHTML=h+"</table>";})();
+// ---------- static tabs ----------
+function renderStatic(){
+  let h="",wk=-1;
+  days.forEach((d,i)=>{const w=Math.floor(i/7);if(w!==wk){wk=w;h+=`<h3>Week ${w+1}</h3>`}
+    h+=`<details><summary>${fmt(d)}: ${STUDY[i][0]}</summary><ul>${tasksFor(i).map(t=>"<li>"+t+"</li>").join("")}</ul></details>`});
+  $("studyList").innerHTML=h;
+  const li=a=>a.map(x=>"<li>"+x+"</li>").join("");
+  $("wu").innerHTML=li(WARMUP);$("cd").innerHTML=li(COOLDOWN);$("sa").innerHTML=li(STR_A(0));$("sb").innerHTML=li(STR_B(0));
+  let r="<table class='tl'><tr><th>Date</th><th>Workout</th></tr>";
+  days.forEach((d,i)=>{const p=runFor(i);r+=`<tr><td>${fmt(d)}</td><td class="${p.k==='race'?'race':''}">${{run:"🏃",race:"🏁",rest:"🚶",A:"💪",B:"💪"}[p.k]} ${p.t}</td></tr>`});
+  $("runTbl").innerHTML=r+"</table>";
+  const dn=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],ord=[1,2,3,4,5,6,0];
+  $("mealTbl").innerHTML="<tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Snack</th><th>Dinner</th></tr>"+ord.map(j=>`<tr><td>${dn[j]}</td><td>${MEALS[j].b}</td><td>${MEALS[j].l}</td><td>${MEALS[j].s}</td><td>${MEALS[j].d}</td></tr>`).join("");
+  $("juiceTbl").innerHTML=ord.map(j=>`<tr><td><b>${dn[j]}</b></td><td><b>${JUICE[j][0]}</b><br>${JUICE[j][1]}</td></tr>`).join("");
+  document.querySelectorAll("[name=race]").forEach(x=>{x.checked=x.value===raceKey();x.onchange=()=>{DB._settings={race:x.value,_t:Date.now()};saveLocal();renderAll();schedulePush();}});
+}
+function renderAll(){renderStatic();renderDay();if(!$("sheet").classList.contains("hide"))renderSheet();}
 
-// ---------- Tabs ----------
+// ---------- tabs ----------
 function show(t){document.querySelectorAll("section").forEach(s=>s.classList.toggle("hide",s.id!==t));
-  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));if(t==="sheet")renderSheet();}
+  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));if(t==="sheet")renderSheet();window.scrollTo(0,0);}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.t));
-renderDay();
+
+// ---------- GitHub Gist sync ----------
+function status(s){$("syncS").textContent=s;$("syncInfo").textContent=SY.gist?"Connected · gist "+SY.gist.slice(0,8)+"… · "+s:"Not connected: data is only on this device";}
+async function api(path,opt={}){
+  const r=await fetch("https://api.github.com"+path,{method:opt.method||"GET",body:opt.body,cache:"no-store",
+    headers:{Authorization:"Bearer "+SY.token,Accept:"application/vnd.github+json",...(opt.body?{"Content-Type":"application/json"}:{})}});
+  if(!r.ok)throw new Error(r.status===401?"Token is wrong or expired":r.status+"");
+  return r.json();
+}
+function merge(remote){let ch=false;for(const k in remote){const a=DB[k],b=remote[k];if(b&&(!a||(b._t||0)>(a._t||0))){DB[k]=b;ch=true}}return ch}
+let syncing=false,again=false,tmr;
+async function sync(){
+  if(!SY.token||!SY.gist)return; if(syncing){again=true;return} syncing=true; status("syncing…");
+  try{
+    const g=await api("/gists/"+SY.gist),f=g.files[FILE];
+    const txt=f?(f.truncated?await (await fetch(f.raw_url)).text():f.content):"{}";
+    let remote={};try{remote=JSON.parse(txt||"{}")}catch(e){}
+    const changed=merge(remote);saveLocal();
+    const needPush=Object.keys(DB).some(k=>!remote[k]||(DB[k]._t||0)>(remote[k]._t||0));
+    if(needPush) await api("/gists/"+SY.gist,{method:"PATCH",body:JSON.stringify({files:{[FILE]:{content:JSON.stringify(DB)}}})});
+    const a=document.activeElement;if(changed&&!(a&&/INPUT|TEXTAREA/.test(a.tagName)&&a.type!=="checkbox"))renderAll();
+    status("✓ synced "+new Date().toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}));
+  }catch(e){status("⚠ sync failed: "+e.message)}
+  syncing=false;if(again){again=false;sync()}
+}
+function schedulePush(){clearTimeout(tmr);tmr=setTimeout(sync,1500)}
+$("conn").onclick=async()=>{
+  const t=$("tok").value.trim();if(!t)return alert("Paste the token first");
+  SY={token:t};status("connecting…");
+  try{
+    let found=null;
+    for(let p=1;p<=5&&!found;p++){const g=await api("/gists?per_page=100&page="+p);if(!g.length)break;found=g.find(x=>x.files&&x.files[FILE]);}
+    if(!found)found=await api("/gists",{method:"POST",body:JSON.stringify({description:"good_habbits tracker data",public:false,files:{[FILE]:{content:JSON.stringify(DB)}}})});
+    SY.gist=found.id;saveSY();$("tok").value="";await sync();alert("Connected ✓ Now paste the same token on your other device as well.");
+  }catch(e){SY={};saveSY();status("⚠ "+e.message);alert("Connect failed: "+e.message)}
+};
+$("syncNow").onclick=sync;
+$("disc").onclick=()=>{if(confirm("Disconnect sync on this device? (data stays)")){SY={};saveSY();status("")}};
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
+setInterval(sync,120000);
+
+// ---------- go ----------
+renderAll();status(SY.gist?"":"");if(!SY.gist)$("syncS").textContent="⚠ sync not set up (⚙ tab)";sync();
 </script>
 </body>
 </html>
