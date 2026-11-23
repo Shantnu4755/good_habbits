@@ -444,3 +444,26 @@ const OFFICE = [
  ["Fat loss rules","No sugar, maida, cold drinks, packaged snacks · protein in every meal · last meal by 9 pm · no late-night munching · strength hafte mein 2 din + running. Fat goes slowly but surely: 0.5 kg/week = ~3.5 kg in 49 days."],
  ["Weekly measure (Sunday)","Morning, empty stomach: weight + waist (tape measure at the belly button). Waist going down = belly fat going down. Write both in the tracker."]
 ];
+
+// ---------- 🛒 Budget shopping list: [group, note, [[item, approx price]]] ----------
+const SHOP = [
+ ["🥕 Weekly: sabzi + fruits","(~₹700–900 / week, from the mandi)",[
+  ["Amla: 14–15 nos (2 a day)","₹50–80"],["Carrot: 1 kg","₹40–60"],["Beetroot: ½ kg","₹25–40"],["Tomato: 1 kg","₹30–50"],
+  ["Cucumber: 1 kg","₹30–50"],["Palak: 1 judi (bunch)","₹15–25"],["Kadhi patta + pudina + ginger + limbu","₹30–40"],
+  ["Banana: 1 dozen","₹50–70"],["Orange / mosambi: 1 kg","₹70–100"],["Apple: 4 nos","₹80–120"],["Papaya: 1 small (or guava 4 nos instead, cheaper)","₹40–60"],
+  ["Pomegranate: 1 (Sunday juice)","₹40–60"]]],
+ ["🥛 Weekly: dairy + protein","(~₹450–550 / week)",[
+  ["Doodh: 3–3.5 L (½ L a day)","₹200–240"],["Dahi: 1 kg (or 2 × 400 g)","₹70–100"],["Paneer: 200 g","₹80–100"],
+  ["Moong (sprout it at home: soak overnight, tie in a cloth) ½ kg, or ready sprouts 2 packs","₹60–80"]]],
+ ["🥜 Monthly: nashta + dry stuff","(~₹2,000–2,600 / month, DMart / bulk)",[
+  ["Oats: 1 kg (rolled oats, unflavoured)","₹150–200"],["Brown/multigrain bread: 4 packs (1 a week)","₹180–220"],["Peanut butter: 1 kg, unsweetened","₹300–450"],
+  ["Besan: 1 kg","₹90–120"],["Poha: 1 kg","₹60–80"],["Almonds: 250 g","₹220–300"],["Walnuts: 200 g","₹200–280"],
+  ["Pumpkin seeds: 200 g","₹150–200"],["Flaxseed: 250 g + chia: 100 g","₹120–160"],["Bhajlele chane (roasted chana): 1 kg","₹120–160"],
+  ["Shengdane (peanuts): ½ kg","₹70–90"],["Makhana: 100 g","₹100–150"],["Khajur (dates): 250 g","₹80–120"],
+  ["Isabgol: 100 g","₹90–140"],["Green tea: 25 bags","₹120–160"],["Black salt + chaat masala + jeera powder","₹50–70"]]],
+ ["🧴 One-time: skin + hair + gear","(~₹2,000–3,000 once; shoes extra)",[
+  ["Face wash","₹150–350"],["Niacinamide 5–10% serum","₹300–600"],["Moisturizer (gel)","₹200–400"],["Sunscreen SPF 50 PA+++","₹300–600"],
+  ["Coconut oil: 250 ml","₹100–150"],["Rosemary oil: 30 ml","₹200–400"],["Mild / sulphate-free shampoo","₹200–400"],["Wide-tooth comb","₹50–100"],
+  ["Alarm clock (so the phone stays out of the bedroom)","₹150–300"],["1 L water bottle","₹150–300"],["Measuring tape (for waist)","₹30–50"],
+  ["Running shoes: Decathlon Kalenji (Jogflow / Run Active) or any proper running shoe. Very important for your knees","₹1,500–3,500"]]]
+];

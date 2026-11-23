@@ -114,10 +114,10 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
 <body>
 <div class="wrap">
   <header class="hero">
-    <div class="top"><div><h1>💪 Mission 10 Jan</h1><div class="mantra" id="mantra"></div></div><div id="syncS"></div></div>
+    <div class="top"><div><h1>💪 Good Habbits</h1><div class="mantra" id="mantra"></div></div><div id="syncS"></div></div>
     <div class="stats">
       <svg id="heroRing" width="74" height="74"></svg>
-      <div class="st"><b id="hDays">–</b><span>divas baki (race)</span></div>
+      <div class="st"><b id="hDays">–</b><span>divas baki</span></div>
       <div class="st"><b id="hDay">–</b><span>journey day</span></div>
       <div class="st"><b id="hStreak">–</b><span>🔥 streak</span></div>
     </div>
@@ -136,6 +136,11 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
 
   <!-- ============ AAJ ============ -->
   <section id="today">
+    <div class="card">
+      <h2>📈 Majha improvement <span class="sub" style="font-weight:400">vs Day 1</span></h2>
+      <div class="vs" id="impVs" style="margin-top:6px"></div>
+      <button class="btn" onclick="show('growth')">Sagle badges + wins baghayla →</button>
+    </div>
     <div class="card" style="padding:12px 14px">
       <div class="daynav" style="background:var(--acc2);margin:0">
         <button id="prev" style="background:var(--card);color:var(--ink)">‹</button>
@@ -268,11 +273,18 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
   <!-- ============ BODY ============ -->
   <section id="body" class="hide">
     <div class="card" style="padding:10px 12px"><div class="seg" id="bodySeg" style="margin:0">
-      <button data-b="b-phone" class="on">📵 Phone detox</button><button data-b="b-run">🏃 Running</button><button data-b="b-office">🪑 Office + energy</button><button data-b="b-ex">💪 Exercises</button><button data-b="b-food">🥣 Nashta + juice</button><button data-b="b-skin">✨ Skin</button><button data-b="b-hair">💇 Hair</button>
+      <button data-b="b-phone" class="on">📵 Phone detox</button><button data-b="b-run">🏃 Running</button><button data-b="b-office">🪑 Office + energy</button><button data-b="b-ex">💪 Exercises</button><button data-b="b-food">🥣 Nashta + juice</button><button data-b="b-skin">✨ Skin</button><button data-b="b-hair">💇 Hair</button><button data-b="b-shop">🛒 Shopping</button>
     </div></div>
     <div id="b-phone" class="bsec">
       <div class="card">
         <h2>📵 Phone detox: priority #1</h2>
+        <details open><summary>📱 Screen time kasa baghaycha (which app)</summary><ol class="ex">
+          <li><b>Android (built-in, free): Digital Wellbeing</b><small>Settings → <b>Digital Wellbeing & parental controls</b> → the number at the top is today's screen time. Tap "Show your data" to see per-app usage. App timers + Bedtime mode (grayscale) are here too. On Samsung: Settings → Digital Wellbeing and parental controls.</small></li>
+          <li><b>iPhone (built-in, free): Screen Time</b><small>Settings → <b>Screen Time</b> → "See All App & Website Activity". Set limits in App Limits, and grayscale is in Accessibility → Display → Colour Filters.</small></li>
+          <li><b>Extra help (free): "one sec" app</b><small>Before Instagram/YouTube opens, it makes you take a deep breath and asks "do you really want to open this?". Very effective for breaking the habit. Play Store / App Store.</small></li>
+          <li><b>Android detailed stats (optional): StayFree</b><small>Free, shows screen time + unlock count + a weekly graph. Not needed if Digital Wellbeing is enough.</small></li>
+          <li><b>Steps sathi</b><small>Android: Google Fit or Samsung Health · iPhone: the Health app (built-in). Write the steps number in the tracker at 11 pm.</small></li>
+        </ol></details>
         <div class="note">Phone = the biggest thief of your time. Win this and your study, sleep and energy all improve. Weekly screen time target: <b id="phList"></b></div>
         <ol class="ex" id="phoneL"></ol>
       </div>
@@ -282,7 +294,7 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
     </div>
     <div id="b-run" class="bsec hide">
       <div class="card">
-        <h2>⏱ 10 Jan race goal</h2>
+        <h2>⏱ Race goal (2 km timed)</h2>
         <div class="sub">Age 26, beginner: a realistic target is <b>12:00</b> (6:00/km), stretch goal <b>11:00</b>. After the 26 Dec time trial, set your goal = that time minus 20–30 seconds.</div>
         <div style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="text" id="goal" placeholder="12:00" style="max-width:120px" inputmode="numeric"><button class="btn fill" id="goalSave" style="margin:0">Set goal</button></div>
         <div class="vs" id="splits" style="margin-top:12px"></div>
@@ -300,7 +312,7 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
         <h2>🏃 Running plan</h2>
         <ul class="ex">
           <li><b>Jog mhanje kay?</b><small>A pace where you can still talk easily. If you can't speak a full sentence, slow down. Speed comes later.</small></li>
-          <li><b>Week cha pattern</b><small>Mon easy · Wed speed/intervals · Fri tempo · Sat long run / time trial · Tue + Thu strength · Sunday rest. Time trials: 28 Nov (baseline), 12 Dec, 26 Dec → race 10 Jan</small></li>
+          <li><b>Week cha pattern</b><small>Mon easy · Wed speed/intervals · Fri tempo · Sat long run / time trial · Tue + Thu strength · Sunday rest. Time trials: 28 Nov (baseline), 12 Dec, 26 Dec → final race</small></li>
           <li><b>Every run</b><small>Warm-up (8 min) → main run → cool-down (8 min). Never skip these, they prevent injuries.</small></li>
           <li><b>Pain rule</b><small>Normal soreness is fine. <b>Sharp pain</b> in a knee, shin or ankle = stop, and just walk that day. Running shoes are a must (not chappals or flat sneakers).</small></li>
         </ul>
@@ -328,6 +340,17 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
       <div class="card">
         <h2>✨ Pigmentation plan</h2>
         <div class="note">The honest truth: juice helps from the inside, but <b>what fades pigmentation most is sunscreen every day</b>. You'll see a clear difference in 6–8 weeks, and pigmentation fades fully over 3–6 months. If the patches are brownish on both cheeks or the forehead, or nothing changes in 6 weeks, see a <b>dermatologist</b> once.</div>
+        <details open><summary>🛍 Products: kay ghyaycha, kuthun (budget)</summary>
+          <div class="sub" style="margin:6px 0">Buy only from <b>Nykaa, Amazon (brand store / "Sold by" the brand), Flipkart, the brand's own website, or a local medical store/chemist</b>. Random cheap sellers often sell fakes. Prices are approximate.</div>
+          <ol class="ex">
+            <li><b>Face wash: ₹150–350</b><small>Simple Refreshing Face Wash · Cetaphil Gentle Skin Cleanser · Minimalist Salicylic 2% face wash (if you get pimples)</small></li>
+            <li><b>Niacinamide serum: ₹300–600 (30 ml lasts 2 months)</b><small>Minimalist Niacinamide 5% · The Derma Co 10% Niacinamide · Deconstruct Niacinamide. For pigmentation + oil control</small></li>
+            <li><b>Moisturizer: ₹200–400</b><small>Pond's Super Light Gel · Simple Hydrating Light Moisturiser · Cetaphil Oily Skin Cream · Minimalist Marula oil moisturizer</small></li>
+            <li><b>Sunscreen SPF 50 PA+++: ₹300–600 (most important)</b><small>Re'equil Ultra Matte · Minimalist SPF 50 · Aqualogica Glow+ Dewy · Lakmé Sun Expert (budget). Buy whichever doesn't leave a white cast and feels light on your skin</small></li>
+            <li><b>Total one-time: ~₹1,000–1,800</b><small>That lasts about 2 months. Vitamin C serum is optional (later, if your budget allows)</small></li>
+            <li><b>Patch test first</b><small>Apply a little behind your ear or on your inner arm and wait 24 hours. If there's itching or redness, don't use it</small></li>
+          </ol>
+        </details>
         <h3>☀️ Sakali (7:15, 2 min)</h3>
         <ol class="ex"><li><b>Gentle face wash</b><small>Don't scrub, just wash lightly</small></li><li><b>Niacinamide 5% serum or Vitamin C serum</b><small>2–3 drops, pat it on gently</small></li><li><b>Light moisturizer</b><small>Gel type is best for oily skin</small></li><li><b>Sunscreen SPF 50, PA+++</b><small>Two finger-lengths for face + neck. <b>Apply it again at 1:30 pm in the office</b>. Sunlight from windows counts too.</small></li></ol>
         <h3>🌙 Raatri (11:15, 2 min)</h3>
@@ -335,6 +358,14 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
         <h3>🍊 Skin food (roj)</h3>
         <ul class="ex"><li><b>Vitamin C</b><small>Amla juice ✅ + 1 orange/guava</small></li><li><b>Lycopene + beta-carotene</b><small>Tomato, carrot, papaya</small></li><li><b>Vitamin E + zinc</b><small>Almonds, pumpkin seeds, sunflower seeds</small></li><li><b>Avoid</b><small>Sugar, fried food, sleeping late. Never put lemon, baking soda or toothpaste directly on your face</small></li></ul>
         <div class="sub">📸 Every Sunday take a face photo in the same spot and the same light. Compare week 1 vs week 7.</div>
+      </div>
+    </div>
+    <div id="b-shop" class="bsec hide">
+      <div class="card">
+        <h2>🛒 Budget shopping list</h2>
+        <div class="sub">Prices are approximate (they vary by city and season). Tick items as you buy them: the list resets every Sunday. <b>Budget tip:</b> buy vegetables and fruit at the local mandi / sabzi market (30–40% cheaper than Blinkit/Zepto), and dry fruits and grains at DMart or in bulk.</div>
+        <div style="margin:10px 0 4px;display:flex;justify-content:space-between;font-size:13px"><span id="shopTxt"></span><button class="btn" id="shopReset" style="margin:0;padding:4px 10px;font-size:12px">Reset</button></div>
+        <div id="shopL"></div>
       </div>
     </div>
     <div id="b-hair" class="bsec hide">
@@ -401,7 +432,7 @@ const raceIdx=()=>RACE;
 const goalSec=()=>(DB._settings&&DB._settings.goal)||720;
 const mmss=s=>{s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
 const parseT=v=>{if(v==null||v==="")return null;v=String(v).trim();if(v.includes(":")){const[m,s]=v.split(":");return (+m)*60+(+s||0)}const n=parseFloat(v);return isNaN(n)?null:Math.round(n*60)};
-const MANTRA=["Thoda thoda roj, 10 Jan la bhari result 💪","Consistency > motivation. Chal, uth!","Aaj cha 1% better, bas evdhach 🔥","Phone khali, life vari 📵","Excuses nako, results pahije ✨","Ek divas pan miss nako. Streak japa 🔥","Unicorn tuzi vaat baghtoy 🦄"];
+const MANTRA=["Thoda thoda roj, bhari result 💪","Consistency > motivation. Chal, uth!","Aaj cha 1% better, bas evdhach 🔥","Phone khali, life vari 📵","Excuses nako, results pahije ✨","Ek divas pan miss nako. Streak japa 🔥","Unicorn tuzi vaat baghtoy 🦄"];
 
 // ---------- running: built for a TIMED 2 km race on 10 Jan ----------
 function runText(w,dow){
@@ -536,7 +567,7 @@ function renderDay(){
   paintScore(k);renderHero();
 }
 function paintScore(k){const s=score(DB[k]);$("dScore").textContent=s+"%";$("dBar").style.width=s+"%";}
-function upd(k,f,v){const r=DB[k]=DB[k]||{};if(v===undefined)delete r[f];else r[f]=v;r._t=Date.now();saveLocal();paintScore(k);renderHero();schedulePush();}
+function upd(k,f,v){const r=DB[k]=DB[k]||{};if(v===undefined)delete r[f];else r[f]=v;r._t=Date.now();saveLocal();paintScore(k);renderHero();renderGrowth();schedulePush();}
 $("prev").onclick=()=>{if(cur>0){cur--;renderDay()}};
 $("next").onclick=()=>{if(cur<days.length-1){cur++;renderDay()}};
 
@@ -612,6 +643,7 @@ function renderStatic(){
   $("hairR").innerHTML=HAIR.routine.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
   $("hairF").innerHTML=HAIR.food.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
   $("hairD").innerHTML="🩺 "+HAIR.doctor;
+  renderShop();
   $("phoneL").innerHTML=exList(PHONE);$("officeL").innerHTML=exList(OFFICE);
   $("phList").textContent=PHONE_TARGET.map((t,j)=>"W"+(j+1)+" ≤"+t+"h").join(" · ");
   const g=goalSec();$("goal").value=mmss(g);
@@ -642,7 +674,7 @@ function renderGrowth(){
     const d=b-a,better=good==="down"?d<0:d>0,pct=a?Math.abs(d/a*100).toFixed(0):0;
     return `<div class="vsc"><span>${lbl}</span><b>${fmtF(b)}${unit}</b><em class="${d===0?"sub":better?"up":"dn"}">${d===0?"Day 1: "+fmtF(a)+unit:(better?"▲ ":"▼ ")+pct+"% vs Day 1 ("+fmtF(a)+unit+")"}</em>${spark(arr,good)}</div>`;};
   const rt=get("rt").map(parseT);
-  $("vs").innerHTML=
+  const vsH=
     card("📵 Screen time",get("scr"),"h","down")+
     card("⏱ 2 km time",rt,"","down",mmss)+
     card("⚡ Energy",get("en"),"/5","up")+
@@ -652,6 +684,9 @@ function renderGrowth(){
     `<div class="vsc"><span>💼 Jobs applied</span><b>${get("job").reduce((a,x)=>a+(+x||0),0)}</b><em class="sub">total</em></div>`+
     `<div class="vsc"><span>📚 Study</span><b>${S.hrs} h</b><em class="sub">${S.td} tasks done</em></div>`+
     `<div class="vsc"><span>🎤 Interview ready</span><b>${S.iqD}/${S.iqT}</b><em class="sub">questions</em></div>`;
+  $("vs").innerHTML=vsH;
+  const top=card("📵 Screen time",get("scr"),"h","down")+card("⏱ 2 km time",rt,"","down",mmss)+card("⚡ Energy",get("en"),"/5","up")+card("⚖️ Weight",get("wt")," kg","down")+card("🚶 Steps",get("stp"),"","up",x=>Math.round(x))+`<div class="vsc"><span>🦄 Unicorn meter</span><b>${S.uni}%</b><em class="sub">target 90%</em></div>`;
+  $("impVs").innerHTML=top;
   // badges
   const scr=get("scr").filter(x=>x!=null),under=days.slice(0,S.ti+1).filter((d,i)=>{const v=(DB[key(d)]||{}).scr;return v!=null&&v<=phoneT(i)}).length;
   const best=S.rts.length?Math.min(...S.rts):99999,jobs=get("job").reduce((a,x)=>a+(+x||0),0);
@@ -667,8 +702,20 @@ function renderGrowth(){
   $("wins").innerHTML=W.length?W.map(([d,w])=>`<div class="win">🏆 ${w.replace(/</g,"&lt;")}<small>${fmt(d)}</small></div>`).join(""):'<div class="sub" style="margin-top:8px">Write your first win in the "Aaj" page tonight ✍️</div>';
 }
 
+// ---------- SHOPPING ----------
+const weekId=()=>{const i=todayIdx();return Math.floor(i/7)};
+function renderShop(){
+  let sh=DB._shop||{};if(sh.wk!==weekId()){sh={wk:weekId()}}
+  let n=0,t=0;
+  $("shopL").innerHTML=SHOP.map((g,gi)=>`<h3>${g[0]} <span class="sub" style="font-weight:400">${g[1]}</span></h3>`+g[2].map(([it,pr],ii)=>{const id=gi+"-"+ii;t++;if(sh[id])n++;
+    return `<div class="row ${sh[id]?"done":""}"><input type="checkbox" data-sh="${id}" id="sh${id}" ${sh[id]?"checked":""}><label for="sh${id}">${it} <span class="sub">· ${pr}</span></label></div>`}).join("")).join("");
+  $("shopTxt").innerHTML=`<b>${n}/${t}</b> ghetla (this week)`;
+  document.querySelectorAll("[data-sh]").forEach(c=>c.onchange=e=>{const cur=(DB._shop&&DB._shop.wk===weekId())?DB._shop:{wk:weekId()};DB._shop=Object.assign({},cur,{[c.dataset.sh]:e.target.checked,_t:Date.now()});saveLocal();schedulePush();renderShop();});
+}
+$("shopReset").onclick=()=>{DB._shop={wk:weekId(),_t:Date.now()};saveLocal();schedulePush();renderShop();};
+
 let tab="today";
-function renderAll(){renderStatic();renderDay();if(tab==="growth")renderGrowth();if(tab==="sheet")renderSheet();if(tab==="study")renderStudy();if(tab==="interview")renderIQ();}
+function renderAll(){renderStatic();renderDay();renderGrowth();if(tab==="sheet")renderSheet();if(tab==="study")renderStudy();if(tab==="interview")renderIQ();}
 function show(t){tab=t;document.querySelectorAll("section").forEach(s=>s.classList.toggle("hide",s.id!==t));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
   if(t==="sheet")renderSheet();if(t==="study")renderStudy();if(t==="interview")renderIQ();if(t==="growth")renderGrowth();window.scrollTo(0,0);}
