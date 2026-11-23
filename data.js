@@ -417,3 +417,30 @@ const IQ = [
   ["Questions to ask the interviewer","'What does the team's tech stack look like?', 'What would the first 3 months look like?', 'How do you do code reviews and deployment?'"]
  ]}
 ];
+
+// ---------- 📵 Phone detox: priority #1 ----------
+const PHONE_TARGET = [4,3.5,3,2.5,2,2,2]; // max screen time (hours) by week
+const PHONE = [
+ ["Phone bedroom chya baher charge kar","Raatri 11:30 la phone hall/kitchen madhe charging la thev. Alarm sathi ₹200 cha alarm clock ghe. This one rule alone fixes half the problem."],
+ ["Pahila 1 tas phone nahi","Uthlya-uthlya phone nahi. Paani, run, aanghol, nashta, then phone. Taking the morning back from your phone = a day with more energy."],
+ ["Instagram / YouTube Shorts / Reels app delete kar","Open them only in the browser if you have to. The friction (extra effort) cuts usage by 50%+. Turn off Shorts on YouTube or use it only on the laptop."],
+ ["App timer lav","Android: Digital Wellbeing → App timers. iPhone: Screen Time → App Limits. Social media 30 min/day total. Once the limit is hit, it's over."],
+ ["Grayscale mode ON","Settings → Accessibility → Colour filters / Bedtime mode → black & white. A colourless phone is boring = you pick it up less."],
+ ["Notifications band","Keep only calls, WhatsApp (important chats) and office apps. Turn off everything else (Insta, Swiggy, shopping, news)."],
+ ["Study / work time = phone dusrya room madhe","Turn on Focus mode / DND. Phone face-down, out of reach."],
+ ["Replacement habit","Feeling the urge to scroll? Do 10 squats, drink a glass of water, or walk for 2 minutes instead. The urge passes in 2 minutes."],
+ ["Raatri 11:00 la Screen Time check kar","Write the number in the tracker on the 'Aaj' page. If it's under the target, the 📵 habit ticks itself ✅"]
+];
+
+// ---------- 🪑 Office health + energy + fat loss ----------
+const OFFICE = [
+ ["Dar 45 min la utha","Set a laptop/phone reminder (or Stretchly app). Get up and walk for 2–3 min, fill your water bottle, stretch. Don't sit for more than 45 min at a stretch."],
+ ["Basaychi padhat","Both feet flat on the floor, back straight against the chair, screen at eye level. Avoid tight jeans/belts. Use a soft cushion if needed."],
+ ["Jevan nantar 10 min walk","After lunch and after dinner, a 10 min walk. Digestion improves, sleepiness drops, belly fat starts to go."],
+ ["Roj 8000+ steps","Check the step counter on your phone. W1–2: 6000, W3–4: 8000, W5+: 10,000. Take the stairs, take phone calls walking."],
+ ["Fiber + paani","2 fruits + salad/sabzi daily + 3 L water. At night 1 tsp isabgol in koomat paani. Digestion stays smooth."],
+ ["Toilet madhe phone nako","Don't sit for more than 5 min, and don't strain. No phone in the bathroom. This is important."],
+ ["Aalas (laziness) cha upay","After waking: cold water on your face + a glass of water + 10 min of sunlight/outdoors. Eat a light lunch. Avoid sugar (it causes energy crashes). Lay out tomorrow's clothes at night."],
+ ["Fat loss rules","No sugar, maida, cold drinks, packaged snacks · protein in every meal · last meal by 9 pm · no late-night munching · strength 2×/week + running. Fat goes slowly but surely: 0.5 kg/week = ~3.5 kg in 49 days."],
+ ["Weekly measure (Sunday)","Morning, empty stomach: weight + waist (tape measure at the belly button). Waist going down = belly fat going down. Write both in the tracker."]
+];

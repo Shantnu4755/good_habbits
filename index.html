@@ -91,6 +91,24 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
 .seg button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:99px;font:inherit;font-size:13px;cursor:pointer}
 .seg button.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
 #syncS{font-size:11px;opacity:.9;text-align:right}
+.nav{grid-template-columns:repeat(7,1fr)}.nav button{font-size:10.5px}
+@media(min-width:860px){.nav{grid-template-columns:repeat(7,auto)}.nav button{font-size:14px}}
+.inputs{grid-template-columns:repeat(2,1fr)}@media(min-width:700px){.inputs{grid-template-columns:repeat(3,1fr)}}
+.uni{margin-top:12px;background:rgba(255,255,255,.15);border-radius:12px;padding:8px 12px;font-size:13px}
+.uni .ub{height:8px;background:rgba(255,255,255,.25);border-radius:99px;overflow:hidden;margin-top:5px;position:relative}.uni .ub i{display:block;height:100%;background:linear-gradient(90deg,#fde68a,#f0abfc,#a5b4fc);border-radius:99px}
+.unicard{background:linear-gradient(135deg,var(--acc2),var(--card))}
+.unibar{height:18px;background:var(--line);border-radius:99px;margin-top:12px;position:relative;overflow:visible}
+.unibar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#f59e0b,#ec4899,#8b5cf6);transition:width .4s}
+.unibar .mark{position:absolute;top:-4px;width:3px;height:26px;background:var(--ink);border-radius:2px}
+.vs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}@media(min-width:700px){.vs{grid-template-columns:repeat(3,1fr)}}
+.vsc{background:var(--acc2);border-radius:14px;padding:12px}.vsc span{font-size:12px;color:var(--mute);display:block}.vsc b{font-size:19px;display:block;margin:2px 0}.vsc em{font-style:normal;font-size:12px;font-weight:600}
+.vsc svg{width:100%;height:30px;display:block;margin-top:4px}
+.up{color:var(--acc)}.dn{color:var(--bad)}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}@media(min-width:700px){.badges{grid-template-columns:repeat(6,1fr)}}
+.bdg{text-align:center;border:1px solid var(--line);border-radius:14px;padding:10px 6px;font-size:11.5px;line-height:1.3}.bdg i{font-style:normal;font-size:28px;display:block}
+.bdg.lock{opacity:.35;filter:grayscale(1)}.bdg.got{background:var(--acc2);border-color:var(--acc)}
+.win{padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}.win small{color:var(--mute);display:block;font-size:12px}
+.seg.en button{min-width:48px}
 </style>
 </head>
 <body>
@@ -103,10 +121,12 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
       <div class="st"><b id="hDay">–</b><span>journey day</span></div>
       <div class="st"><b id="hStreak">–</b><span>🔥 streak</span></div>
     </div>
+    <div class="uni" id="heroUni"></div>
   </header>
 
   <nav class="nav" id="nav">
     <button data-t="today" class="on"><i>🏠</i>Aaj</button>
+    <button data-t="growth"><i>🚀</i>Growth</button>
     <button data-t="sheet"><i>📊</i>Hisaab</button>
     <button data-t="study"><i>📚</i>Study</button>
     <button data-t="interview"><i>🎤</i>Interview</button>
@@ -128,6 +148,21 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
       <div class="habits" id="habits"></div>
       <div class="bar" style="margin-top:12px"><i id="dBar" style="width:0"></i></div>
     </div>
+    <div class="card">
+      <h2>📈 Aajche numbers <span class="sub" style="font-weight:400">(raatri 11 la bhar)</span></h2>
+      <div class="inputs">
+        <div><label>📵 Screen time (hrs) · target <b id="phT"></b></label><input type="number" id="scr" min="0" max="18" step="0.1" inputmode="decimal" placeholder="e.g. 3.5"></div>
+        <div><label>🚶 Steps</label><input type="number" id="stp" min="0" max="60000" step="100" inputmode="numeric" placeholder="e.g. 8000"></div>
+        <div><label>💼 Jobs applied</label><input type="number" id="job" min="0" max="100" step="1" inputmode="numeric" placeholder="0"></div>
+        <div><label>📚 Study hours</label><input type="number" id="prep" min="0" max="14" step="0.5" inputmode="decimal"></div>
+        <div><label>⏱ 2 km time (mm:ss)</label><input type="text" id="rt" placeholder="e.g. 12:30" inputmode="numeric"></div>
+        <div><label>⚖️ Weight / 📏 Waist (Sun)</label><div style="display:flex;gap:6px"><input type="number" id="wt" min="30" max="200" step="0.1" inputmode="decimal" placeholder="kg"><input type="number" id="wst" min="50" max="150" step="0.5" inputmode="decimal" placeholder="cm"></div></div>
+      </div>
+      <label class="sub" style="display:block;margin-top:12px">⚡ Energy level aaj</label>
+      <div class="seg" id="energy"></div>
+      <input type="text" id="win" placeholder="🏆 Aaj cha 1 win (e.g. 'Phone 2 tas kami', '1.5 km non-stop palalo')" style="margin-top:6px">
+      <textarea id="note" placeholder="Note: aaj kasa gela? kuthe atakla?"></textarea>
+    </div>
     <div class="g2">
       <div class="card" id="exCard"></div>
       <div class="card" id="studyCard"></div>
@@ -136,14 +171,30 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
       <div class="card" id="foodCard"></div>
       <div class="card" id="careCard"></div>
     </div>
+  </section>
+
+  <!-- ============ GROWTH ============ -->
+  <section id="growth" class="hide">
+    <div class="card unicard">
+      <h2>🦄 Unicorn meter</h2>
+      <div class="sub">Finish 90% of the 49-day challenge → <b>gift yourself the unicorn 🎁</b>. Each day's score adds to it.</div>
+      <div class="unibar"><i id="uniBar"></i><span class="mark" style="left:90%"></span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:6px"><span id="uniTxt"></span><span>🎯 90%</span></div>
+      <div class="note" style="margin-top:10px" id="uniPace"></div>
+    </div>
     <div class="card">
-      <h2>📝 Aajche numbers</h2>
-      <div class="inputs">
-        <div><label>Study hours</label><input type="number" id="prep" min="0" max="14" step="0.5" inputmode="decimal"></div>
-        <div><label>Weight (kg)</label><input type="number" id="wt" min="30" max="200" step="0.1" inputmode="decimal"></div>
-        <div><label>2 km time (min)</label><input type="number" id="rt" min="5" max="40" step="0.1" inputmode="decimal"></div>
-      </div>
-      <textarea id="note" placeholder="Aaj kasa gela? Run, mood, kuthe atakla… (note)"></textarea>
+      <h2>💪 Tu vs Day 1</h2>
+      <div class="sub">Look here to see how far you've come. Proof that you're getting better every day.</div>
+      <div class="vs" id="vs"></div>
+    </div>
+    <div class="card">
+      <h2>🏅 Badges</h2>
+      <div class="badges" id="badges"></div>
+    </div>
+    <div class="card">
+      <h2>🏆 Wins diary</h2>
+      <div class="sub">Every small win counts. On low days, read this.</div>
+      <div id="wins"></div>
     </div>
   </section>
 
@@ -217,14 +268,39 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
   <!-- ============ BODY ============ -->
   <section id="body" class="hide">
     <div class="card" style="padding:10px 12px"><div class="seg" id="bodySeg" style="margin:0">
-      <button data-b="b-run" class="on">🏃 Running</button><button data-b="b-ex">💪 Exercises</button><button data-b="b-food">🥣 Nashta + juice</button><button data-b="b-skin">✨ Skin</button><button data-b="b-hair">💇 Hair</button>
+      <button data-b="b-phone" class="on">📵 Phone detox</button><button data-b="b-run">🏃 Running</button><button data-b="b-office">🪑 Office + energy</button><button data-b="b-ex">💪 Exercises</button><button data-b="b-food">🥣 Nashta + juice</button><button data-b="b-skin">✨ Skin</button><button data-b="b-hair">💇 Hair</button>
     </div></div>
-    <div id="b-run" class="bsec">
+    <div id="b-phone" class="bsec">
+      <div class="card">
+        <h2>📵 Phone detox: priority #1</h2>
+        <div class="note">Phone = the biggest thief of your time. Win this and your study, sleep and energy all improve. Weekly screen time target: <b id="phList"></b></div>
+        <ol class="ex" id="phoneL"></ol>
+      </div>
+    </div>
+    <div id="b-office" class="bsec hide">
+      <div class="card"><h2>🪑 Office health + energy + fat loss</h2><ol class="ex" id="officeL"></ol></div>
+    </div>
+    <div id="b-run" class="bsec hide">
+      <div class="card">
+        <h2>⏱ 10 Jan race goal</h2>
+        <div class="sub">Age 26, beginner: a realistic target is <b>12:00</b> (6:00/km), stretch goal <b>11:00</b>. After the 26 Dec time trial, set your goal = that time minus 20–30 seconds.</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="text" id="goal" placeholder="12:00" style="max-width:120px" inputmode="numeric"><button class="btn fill" id="goalSave" style="margin:0">Set goal</button></div>
+        <div class="vs" id="splits" style="margin-top:12px"></div>
+        <h3>🏁 Race day strategy</h3>
+        <ol class="ex">
+          <li><b>2 hours before</b><small>Banana + 1 toast/poha, 1 glass water. Nothing new, no heavy food.</small></li>
+          <li><b>Warm-up (15 min before)</b><small>5 min jog + leg swings + 3 strides (fast but relaxed 50 m).</small></li>
+          <li><b>First 500 m</b><small>Don't go off too fast with the crowd. Run 3–5 sec/400 m slower than your goal pace.</small></li>
+          <li><b>500 m – 1500 m</b><small>Hold goal pace. Breathe steadily (2 steps in, 2 steps out).</small></li>
+          <li><b>Last 500 m</b><small>Give it everything 🔥. Pump your arms. Kick in the last 200 m.</small></li>
+          <li><b>Shoes + kapde</b><small>Wear the same shoes you trained in. Pin your bib the night before.</small></li>
+        </ol>
+      </div>
       <div class="card">
         <h2>🏃 Running plan</h2>
         <ul class="ex">
           <li><b>Jog mhanje kay?</b><small>A pace where you can still talk easily. If you can't speak a full sentence, slow down. Speed comes later.</small></li>
-          <li><b>Week cha pattern</b><small>Run on Mon/Wed/Fri/Sat · Strength A on Tue · Strength B on Thu · Sunday rest + walk</small></li>
+          <li><b>Week cha pattern</b><small>Mon easy · Wed speed/intervals · Fri tempo · Sat long run / time trial · Tue + Thu strength · Sunday rest. Time trials: 28 Nov (baseline), 12 Dec, 26 Dec → race 10 Jan</small></li>
           <li><b>Every run</b><small>Warm-up (8 min) → main run → cool-down (8 min). Never skip these, they prevent injuries.</small></li>
           <li><b>Pain rule</b><small>Normal soreness is fine. <b>Sharp pain</b> in a knee, shin or ankle = stop, and just walk that day. Running shoes are a must (not chappals or flat sneakers).</small></li>
         </ul>
@@ -282,7 +358,7 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
         <tr><td><b>10:00–7:00</b></td><td>Office · 1:30 sunscreen again · 4:30 healthy snack · 💧 bottle on your desk</td></tr>
         <tr><td><b>7:00–9:00</b></td><td>Commute, freshen up, dinner</td></tr>
         <tr><td><b>9:00–11:00</b></td><td>📚 The day's topic (phone in another room)</td></tr>
-        <tr><td><b>11:00–11:30</b></td><td>✅ Fill in the tracker + skin/hair care + lay out tomorrow's running kapde</td></tr>
+        <tr><td><b>11:00–11:30</b></td><td>✅ Check screen time + fill in the tracker (numbers + win) + skin/hair care + lay out running kapde · 📵 phone out of the bedroom</td></tr>
         <tr><td><b>11:30–12:00</b></td><td>No screen. Haldi doodh (optional)</td></tr>
         <tr><td><b>12:00</b></td><td>😴 Zop. (Only 6 hours, so on weekends get 7.5–8 hours)</td></tr>
       </table>
@@ -297,11 +373,6 @@ th:first-child,td:first-child{text-align:left;white-space:nowrap}
       <input type="password" id="tok" placeholder="ghp_...">
       <div><button class="btn fill" id="conn">Connect</button><button class="btn" id="syncNow">Sync now</button><button class="btn" id="disc">Disconnect</button></div>
       <p class="sub" id="syncInfo"></p>
-    </div>
-    <div class="card">
-      <h2>🏁 Race date</h2>
-      <div class="seg" id="raceSeg"><button data-r="2027-01-01">1 January</button><button data-r="2027-01-10">10 January</button></div>
-      <div class="sub">The running plan adjusts automatically (the last 3 days are taper/rest).</div>
     </div>
   </section>
 </div>
@@ -325,47 +396,51 @@ try{DB=JSON.parse(localStorage.getItem(LS))||{}}catch(e){}
 try{SY=JSON.parse(localStorage.getItem(SK))||{}}catch(e){}
 const saveLocal=()=>{try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}};
 const saveSY=()=>{try{localStorage.setItem(SK,JSON.stringify(SY))}catch(e){}};
-const raceKey=()=>(DB._settings&&DB._settings.race)||"2027-01-10";
-const raceIdx=()=>days.findIndex(d=>key(d)===raceKey());
+const RACE=48; // Sun 10 Jan
+const raceIdx=()=>RACE;
+const goalSec=()=>(DB._settings&&DB._settings.goal)||720;
+const mmss=s=>{s=Math.round(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
+const parseT=v=>{if(v==null||v==="")return null;v=String(v).trim();if(v.includes(":")){const[m,s]=v.split(":");return (+m)*60+(+s||0)}const n=parseFloat(v);return isNaN(n)?null:Math.round(n*60)};
+const MANTRA=["Thoda thoda roj, 10 Jan la bhari result 💪","Consistency > motivation. Chal, uth!","Aaj cha 1% better, bas evdhach 🔥","Phone khali, life vari 📵","Excuses nako, results pahije ✨","Ek divas pan miss nako. Streak japa 🔥","Unicorn tuzi vaat baghtoy 🦄"];
 
-const MANTRA=["Thoda thoda roj, 10 Jan la bhari result 💪","Consistency > motivation. Chal, uth!","Aaj cha 1% better, bas evdhach 🔥","Body, brain, career: teeno build karu 🚀","Excuses nako, results pahije ✨","Ek divas pan miss nako. Streak japa 🔥","Tu karu shakto. Aaj cha checklist poora kar ✅"];
-
-// ---------- running ----------
-const RUNW=[
- {e:"Walk-run: 1 min jog + 2 min walk. Repeat 6 times (18 min)",s:"Walk-run 20 min: 1 min jog + 1 min walk, 10 times"},
- {e:"Walk-run: 2 min jog + 1 min walk. Repeat 6 times (18 min)",s:"1 km non-stop jog, then 1 km walk-run"},
- {e:"Walk-run: 4 min jog + 1 min walk. Repeat 4 times (20 min)",s:"1.5 km non-stop jog 💪"},
- {e:"1.5 km jog, 1 min walk, then another 500 m jog",s:"2 km with just 1 short walk break"},
- {e:"2 km non-stop, slow and steady 🎯",s:"2 km TIME TRIAL ⏱: enter your time in '2 km time'"},
- {e:"2 to 2.5 km easy jog",w:"Speed day: 200 m fast + 200 m walk, 6 times",s:"3 km easy (so that 2 km feels easy)"},
- {e:"2 km steady",w:"Speed day: 400 m at race pace + 2 min walk, 4 times",s:"2 km TIME TRIAL ⏱: compare it with week 5"}
-];
+// ---------- running: built for a TIMED 2 km race on 10 Jan ----------
+function runText(w,dow){
+  const g=goalSec(),p200=mmss(g/10),p300=mmss(g*.15),p400=mmss(g/5),pk=mmss(g/2);
+  const P=[
+   {1:"Walk-run: 1 min jog + 2 min walk, 6 rounds (18 min)",3:"Walk-run: 1 min jog + 2 min walk, 7 rounds (21 min)",5:"Walk-run: 90 sec jog + 90 sec walk, 6 rounds",6:"⏱ BASELINE TEST: run 2 km as fast as feels comfortable. Walking is allowed. Note your time: this is your starting line 📍"},
+   {1:"Walk-run: 2 min jog + 1 min walk, 6 rounds",3:"Walk-run: 2 min jog + 1 min walk, 7 rounds",5:"Walk-run: 3 min jog + 1 min walk, 5 rounds",6:"1 km non-stop jog, then 1 km walk-run"},
+   {1:"Walk-run: 4 min jog + 1 min walk, 4 rounds",3:"Speed intro: 10 min easy jog, then 100 m fast + 100 m walk, 6 rounds",5:"1.5 km non-stop easy jog",6:"⏱ TIME TRIAL 2: 2 km with as few walk breaks as possible. Compare with your baseline 📈"},
+   {1:"2 km easy non-stop",3:`Intervals: 200 m fast (target ${p200}) + 200 m walk, 6 rounds`,5:"Tempo: 1 km easy + 1 km 'comfortably hard' (you can still talk, but it's tough)",6:"2.5 km easy jog"},
+   {1:"2 km easy",3:`Intervals: 300 m fast (target ${p300}) + 200 m walk, 5 rounds`,5:"Tempo: 500 m easy + 1.5 km steady-hard",6:"⏱ TIME TRIAL 3: 2 km at FULL effort. Use this time to set your race goal (Body → Running)"},
+   {1:"2.5 km easy",3:`Intervals: 400 m at goal pace (${p400}) + 2 min walk, 4 rounds`,5:`Race-pace practice: 1 km easy + 1 km at goal pace (${pk}/km)`,6:"3 km easy (endurance, so 2 km on race day feels easy)"}
+  ];
+  return P[w][dow];
+}
 function runFor(i){
-  const R=raceIdx(),dow=days[i].getDay(),w=Math.floor(i/7);
-  if(i===R) return {k:"race",t:"🏁 RACE DAY: 2 km! Nashta 2 hours before (banana + toast). 10 min warm-up. Start slow, push in the last 500 m."};
-  if(i>R){ if(i===R+1) return {k:"rest",t:"Recovery: 20 min walk + stretching. Congratulations 🎉"};
-    if([1,3,5,6].includes(dow)) return {k:"run",t:"Easy 2–3 km run (keep the habit going)"};
-    if(dow===0) return {k:"rest",t:"Rest: 30 min walk + stretching"};
-    return {k:dow===2?"A":"B",t:"Strength "+(dow===2?"A":"B")+" + 10 min fast walk"}; }
-  if(i>=R-3) return [{k:"run",t:"Easy 1 km jog + 4 strides (50 m fast but relaxed)"},{k:"rest",t:"Rest: 15 min walk + stretching. Drink lots of water"},{k:"rest",t:"Full rest. Lay out your shoes/kapde, eat roti/rice for dinner, sleep by 11 🎽"}][i-(R-3)];
+  const dow=days[i].getDay(),w=Math.floor(i/7),g=goalSec();
+  if(i===RACE) return {k:"race",t:`🏁 RACE DAY: 2 km timed! Goal ${mmss(g)} = ${mmss(g/5)} per 400 m. Nashta 2 hours before, 15 min warm-up, controlled first 500 m, push in the last 500 m 🔥`};
+  if(i>=42) return [{k:"run",t:"2 km easy + 4 strides (50 m fast but relaxed)"},{k:"A",t:"Strength A LIGHT: just 1 set, no muscle soreness"},{k:"run",t:`Sharpener: 400 m at goal pace (${mmss(g/5)}) + 2 min walk, 3 rounds`},{k:"run",t:"Easy 1 km jog + 3 strides"},{k:"rest",t:"Rest: 15 min walk + stretching, drink lots of water"},{k:"rest",t:"Full rest. Lay out your shoes/kapde/bib, carbs at dinner (rice/roti), sleep by 11 🎽"}][i-42];
   if(dow===0) return {k:"rest",t:"Rest day: 30 min easy walk + cool-down stretches"};
   if(dow===2) return {k:"A",t:"Strength A + 10 min fast walk"};
   if(dow===4) return {k:"B",t:"Strength B + 10 min fast walk"};
-  const W=RUNW[Math.min(w,6)];
-  return {k:"run",t:dow===6?W.s:(dow===3&&W.w)?W.w:W.e};
+  return {k:"run",t:runText(w,dow)};
 }
 const exList=a=>a.map(([n,h])=>`<li><b>${n}</b><small>${h}</small></li>`).join("");
 const ICON={run:"🏃",race:"🏁",rest:"🚶",A:"💪",B:"💪"};
+const phoneT=i=>PHONE_TARGET[Math.min(Math.floor(i/7),6)];
+const stepT=i=>[6000,6000,8000,8000,10000,10000,8000][Math.min(Math.floor(i/7),6)];
 
 // ---------- habits ----------
 const ITEMS=[
-  ["run","🏃","Workout jhala","as per plan"],
+  ["phone","📵","Screen time","target paryant"],
+  ["run","🏃","Workout","as per plan"],
+  ["steps","🚶","Steps + desk breaks","dar 45 min utha"],
   ["juice","🥤","Amla juice","ghetla"],
-  ["diet","🥣","Healthy nashta","+ evening snack"],
-  ["water","💧","3 L paani","pyayla"],
+  ["diet","🥣","Clean khana","no sugar/maida/junk"],
+  ["water","💧","3 L paani + fiber","isabgol raatri"],
   ["study","📚","Study done","sagle tasks"],
   ["skin","✨","Skin + hair care","AM + PM"],
-  ["sleep","😴","12 paryant zop","phone off 11:30"]
+  ["sleep","😴","12 paryant zop","phone baher"]
 ];
 const score=r=>r?Math.round(ITEMS.filter(([k])=>r[k]).length/ITEMS.length*100):0;
 const tasksFor=i=>morningFor(i).concat(STUDY[i][1]);
@@ -390,9 +465,10 @@ function stats(){
   const hrs=days.reduce((a,d)=>a+(+((DB[key(d)]||{}).prep)||0),0);
   const iqT=IQ.reduce((a,c)=>a+c.q.length,0),iq=DB._iq||{},iqD=Object.keys(iq).filter(k=>k!=="_t"&&iq[k]).length;
   let st=0,i=ti;if(i>=0&&score(DB[key(days[i])])<50)i--;for(;i>=0&&score(DB[key(days[i])])>=50;i--)st++;
-  const wts=days.map(d=>(DB[key(d)]||{}).wt).filter(Boolean),rts=days.map(d=>(DB[key(d)]||{}).rt).filter(Boolean);
+  const wts=days.map(d=>(DB[key(d)]||{}).wt).filter(Boolean),rts=days.map(d=>parseT((DB[key(d)]||{}).rt)).filter(Boolean);
   const done=past.filter(d=>score(DB[key(d)])>=80).length;
-  return {ti,overall,cats,td,tt,hrs,iqT,iqD,st,wts,rts,done,past};
+  const uni=Math.round(days.reduce((a,d)=>a+score(DB[key(d)]),0)/days.length*10)/10; // whole-challenge completion
+  return {ti,overall,cats,td,tt,hrs,iqT,iqD,st,wts,rts,done,past,uni};
 }
 function renderHero(){
   const S=stats(),n=logicalNow(),R=days[raceIdx()];
@@ -401,6 +477,7 @@ function renderHero(){
   $("hDay").textContent=(S.ti+1)+"/"+days.length;
   $("hStreak").textContent=S.st;
   $("mantra").textContent=MANTRA[(S.ti<0?0:S.ti)%MANTRA.length];
+  $("heroUni").innerHTML=`🦄 Unicorn meter: <b>${S.uni}%</b> / 90% <div class="ub"><i style="width:${Math.min(100,S.uni/90*100)}%"></i></div>`;
 }
 
 // ---------- AAJ ----------
@@ -410,7 +487,7 @@ function renderDay(){
   $("dTitle").textContent=fmt(d)+(k===todayKey?" · Aaj":"");
   $("dSub").textContent="Day "+(i+1)+" of "+days.length+" · Week "+(w+1);
   // habits
-  $("habits").innerHTML=ITEMS.map(([id,e,l,s])=>`<button class="hab ${r[id]?"on":""}" data-h="${id}"><i>${e}</i><b>${l}<small>${id==="run"&&p.k==="rest"?"rest/walk day":s}</small></b></button>`).join("");
+  $("habits").innerHTML=ITEMS.map(([id,e,l,s])=>`<button class="hab ${r[id]?"on":""}" data-h="${id}"><i>${e}</i><b>${l}<small>${id==="run"&&p.k==="rest"?"rest/walk day":id==="phone"?"≤ "+phoneT(i)+" hrs":id==="steps"?stepT(i)+"+ steps":s}</small></b></button>`).join("");
   document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{const id=b.dataset.h;upd(k,id,!(DB[k]||{})[id]);b.classList.toggle("on",!!DB[k][id]);});
   // exercise
   let ex=`<h2>${ICON[p.k]} Exercise</h2><div class="big ${p.k==='race'?'race':''}">${p.t}</div>`;
@@ -432,7 +509,8 @@ function renderDay(){
     <li><b>🥤 ${J[0]}</b><small>${J[1]}</small></li>
     <li><b>🍳 Nashta: ${B[0]}</b><small>${B[1]}</small></li>
     <li><b>☕ 4:30 snack</b><small>${EVENING[i%EVENING.length]}</small></li>
-    <li><b>🎒 Tiffin (vel asel tar)</b><small>${TIFFIN[i%TIFFIN.length]}</small></li></ol>`;
+    <li><b>🎒 Tiffin (vel asel tar)</b><small>${TIFFIN[i%TIFFIN.length]}</small></li>
+    <li><b>🌙 Raatri: 1 tsp isabgol + koomat paani</b><small>Lunch/dinner can be anything, just eat by 9 pm, don't overeat, and walk 10 min afterwards</small></li></ol>`;
   // care
   const oil=dow===3||dow===6,sham=[1,4,0].includes(dow);
   $("careCard").innerHTML=`<h2>✨ Skin + 💇 Hair</h2><ol class="ex">
@@ -443,11 +521,18 @@ function renderDay(){
     ${oil?`<li><b>🫙 Aaj raatri oil massage</b><small>Coconut oil + 3–4 drops rosemary oil, 5 min fingertip massage. Shampoo in the morning</small></li>`:""}
     ${dow===0?`<li><b>📸 Sunday photo + weight</b><small>Face photo in the same light + enter your weight in the box below</small></li>`:""}</ol>`;
   // inputs
-  $("prep").value=r.prep??"";$("wt").value=r.wt??"";$("rt").value=r.rt??"";$("note").value=r.note??"";
-  $("prep").oninput=e=>upd(k,"prep",e.target.value===""?undefined:+e.target.value);
-  $("wt").oninput=e=>upd(k,"wt",e.target.value===""?undefined:+e.target.value);
-  $("rt").oninput=e=>upd(k,"rt",e.target.value===""?undefined:+e.target.value);
-  $("note").oninput=e=>upd(k,"note",e.target.value);
+  $("phT").textContent="≤ "+phoneT(i)+"h";
+  const num=(id,f,after)=>{$(id).value=r[f]??"";$(id).oninput=e=>{const v=e.target.value===""?undefined:+e.target.value;upd(k,f,v);if(after)after(v)}};
+  const syncHab=(id,on)=>{upd(k,id,on);const b=document.querySelector(`[data-h="${id}"]`);if(b)b.classList.toggle("on",on)};
+  num("prep","prep");num("wt","wt");num("wst","wst");num("job","job");
+  num("scr","scr",v=>syncHab("phone",v!==undefined&&v<=phoneT(i)));
+  num("stp","stp",v=>{if(v!==undefined&&v>=stepT(i))syncHab("steps",true)});
+  $("rt").value=r.rt??"";$("rt").oninput=e=>upd(k,"rt",e.target.value.trim()||undefined);
+  $("win").value=r.win??"";$("win").oninput=e=>upd(k,"win",e.target.value||undefined);
+  $("note").value=r.note??"";$("note").oninput=e=>upd(k,"note",e.target.value);
+  $("energy").className="seg en";
+  $("energy").innerHTML=["😴","😐","🙂","😃","🔥"].map((e,j)=>`<button data-en="${j+1}" class="${r.en===j+1?"on":""}">${e} ${j+1}</button>`).join("");
+  document.querySelectorAll("[data-en]").forEach(b=>b.onclick=()=>{upd(k,"en",+b.dataset.en);document.querySelectorAll("[data-en]").forEach(x=>x.classList.toggle("on",x===b))});
   paintScore(k);renderHero();
 }
 function paintScore(k){const s=score(DB[k]);$("dScore").textContent=s+"%";$("dBar").style.width=s+"%";}
@@ -464,7 +549,7 @@ function renderSheet(){
   $("kHrs").textContent=S.hrs+" h";
   $("kIQ").textContent=S.iqD+"/"+S.iqT;
   $("kWt").textContent=S.wts.length>1?((S.wts[S.wts.length-1]-S.wts[0]>0?"+":"")+(S.wts[S.wts.length-1]-S.wts[0]).toFixed(1)+" kg"):(S.wts[0]?S.wts[0]+" kg":"–");
-  $("kRun").textContent=S.rts.length?Math.min(...S.rts)+" min":"–";
+  $("kRun").textContent=S.rts.length?mmss(Math.min(...S.rts)):"–";
   $("cats").innerHTML=S.cats.map(([l,v])=>`<div class="cat"><span>${l}</span><div class="bar"><i style="width:${v}%"></i></div><b>${v}%</b></div>`).join("")+
     `<div class="cat"><span>📚 Study tasks (total)</span><div class="bar"><i style="width:${S.tt?Math.round(S.td/S.tt*100):0}%"></i></div><b>${S.tt?Math.round(S.td/S.tt*100):0}%</b></div>`+
     `<div class="cat"><span>🎤 Interview ready</span><div class="bar"><i style="width:${Math.round(S.iqD/S.iqT*100)}%"></i></div><b>${Math.round(S.iqD/S.iqT*100)}%</b></div>`;
@@ -527,15 +612,66 @@ function renderStatic(){
   $("hairR").innerHTML=HAIR.routine.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
   $("hairF").innerHTML=HAIR.food.map(x=>`<li><b style="font-weight:500">${x}</b></li>`).join("");
   $("hairD").innerHTML="🩺 "+HAIR.doctor;
-  document.querySelectorAll("#raceSeg button").forEach(b=>{b.classList.toggle("on",b.dataset.r===raceKey());b.onclick=()=>{DB._settings={race:b.dataset.r,_t:Date.now()};saveLocal();schedulePush();renderAll();}});
+  $("phoneL").innerHTML=exList(PHONE);$("officeL").innerHTML=exList(OFFICE);
+  $("phList").textContent=PHONE_TARGET.map((t,j)=>"W"+(j+1)+" ≤"+t+"h").join(" · ");
+  const g=goalSec();$("goal").value=mmss(g);
+  $("splits").innerHTML=[["Goal 2 km",mmss(g)],["Per km",mmss(g/2)],["Per 400 m",mmss(g/5)],["Per 200 m",mmss(g/10)],["Per 300 m",mmss(g*.15)],["Pace",mmss(g/2)+" /km"]].map(([a,b])=>`<div class="vsc"><span>${a}</span><b>${b}</b></div>`).join("");
 }
 document.querySelectorAll("#bodySeg button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#bodySeg button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".bsec").forEach(s=>s.classList.toggle("hide",s.id!==b.dataset.b));});
 
+$("goalSave").onclick=()=>{const v=parseT($("goal").value);if(!v||v<300||v>1800)return alert("Enter it like 12:00");DB._settings=Object.assign({},DB._settings||{},{goal:v,_t:Date.now()});saveLocal();schedulePush();renderAll();alert("Goal set: "+mmss(v)+" ✅");};
+
+// ---------- GROWTH (daily improvement tracker) ----------
+function spark(vals,good){ // good: "up" | "down"
+  const v=vals.filter(x=>x!=null);if(v.length<2)return "";
+  const mn=Math.min(...v),mx=Math.max(...v),r=mx-mn||1,W=100,H=28;
+  const pts=v.map((x,j)=>`${(j/(v.length-1)*W).toFixed(1)},${(H-2-(x-mn)/r*(H-4)).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="var(--acc)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`;
+}
+function renderGrowth(){
+  const S=stats(),get=f=>days.slice(0,S.ti+1).map(d=>(DB[key(d)]||{})[f]).map(x=>x===""?undefined:x);
+  // unicorn
+  $("uniBar").style.width=Math.min(100,S.uni)+"%";
+  $("uniTxt").innerHTML=`<b>${S.uni}%</b> complete`;
+  const left=days.length-S.ti-1,sumSoFar=days.slice(0,S.ti+1).reduce((a,d)=>a+score(DB[key(d)]),0),need=left>0?Math.max(0,(90*days.length-sumSoFar)/left):0;
+  $("uniPace").innerHTML=S.uni>=90?"🦄🎉 UNICORN UNLOCKED! Tu karun dakhavla!":need>100?"Need: every remaining day at 100%+. Hard, but finish strong 💪":`For the unicorn: aim for <b>${Math.ceil(need)}%</b> average on each of the remaining ${left} days. Current average: <b>${S.overall}%</b> ${S.overall>=90?"✅ on track!":"🔥 push a bit more!"}`;
+  // vs day 1
+  const first=a=>a.find(x=>x!=null),lastAvg=(a,n=3)=>{const v=a.filter(x=>x!=null).slice(-n);return v.length?v.reduce((x,y)=>x+y,0)/v.length:null};
+  const card=(lbl,arr,unit,good,fmtF=x=>(+x).toFixed(1).replace(/\.0$/,""))=>{
+    const a=first(arr),b=lastAvg(arr);if(a==null)return `<div class="vsc"><span>${lbl}</span><b>–</b><em class="sub">fill it in on the Aaj page</em></div>`;
+    const d=b-a,better=good==="down"?d<0:d>0,pct=a?Math.abs(d/a*100).toFixed(0):0;
+    return `<div class="vsc"><span>${lbl}</span><b>${fmtF(b)}${unit}</b><em class="${d===0?"sub":better?"up":"dn"}">${d===0?"Day 1: "+fmtF(a)+unit:(better?"▲ ":"▼ ")+pct+"% vs Day 1 ("+fmtF(a)+unit+")"}</em>${spark(arr,good)}</div>`;};
+  const rt=get("rt").map(parseT);
+  $("vs").innerHTML=
+    card("📵 Screen time",get("scr"),"h","down")+
+    card("⏱ 2 km time",rt,"","down",mmss)+
+    card("⚡ Energy",get("en"),"/5","up")+
+    card("🚶 Steps",get("stp"),"","up",x=>Math.round(x))+
+    card("⚖️ Weight",get("wt")," kg","down")+
+    card("📏 Waist",get("wst")," cm","down")+
+    `<div class="vsc"><span>💼 Jobs applied</span><b>${get("job").reduce((a,x)=>a+(+x||0),0)}</b><em class="sub">total</em></div>`+
+    `<div class="vsc"><span>📚 Study</span><b>${S.hrs} h</b><em class="sub">${S.td} tasks done</em></div>`+
+    `<div class="vsc"><span>🎤 Interview ready</span><b>${S.iqD}/${S.iqT}</b><em class="sub">questions</em></div>`;
+  // badges
+  const scr=get("scr").filter(x=>x!=null),under=days.slice(0,S.ti+1).filter((d,i)=>{const v=(DB[key(d)]||{}).scr;return v!=null&&v<=phoneT(i)}).length;
+  const best=S.rts.length?Math.min(...S.rts):99999,jobs=get("job").reduce((a,x)=>a+(+x||0),0);
+  let maxSt=0,c=0;days.slice(0,S.ti+1).forEach(d=>{if(score(DB[key(d)])>=50){c++;maxSt=Math.max(maxSt,c)}else c=0});
+  const wl=S.wts.length>1?S.wts[0]-S.wts[S.wts.length-1]:0;
+  const B=[["🌱","Day 1 done",S.past.some(d=>score(DB[key(d)])>=50)],["🔥","3-day streak",maxSt>=3],["⚡","7-day streak",maxSt>=7],["💎","21-day streak",maxSt>=21],["👑","42-day streak",maxSt>=42],
+    ["📵","Phone win: 3 din",under>=3],["🧘","Phone win: 14 din",under>=14],["🏃","First 2 km logged",S.rts.length>0],["🎯","2 km < 13:00",best<780],["🚀","2 km < 12:00",best<720],["⚡","2 km < 11:00",best<660],
+    ["📚","50 study tasks",S.td>=50],["🧠","150 study tasks",S.td>=150],["💼","10 applications",jobs>=10],["📨","50 applications",jobs>=50],["🎤","50% interview ready",S.iqD>=S.iqT/2],["🏆","100% interview ready",S.iqD>=S.iqT],
+    ["⚖️","-1 kg",wl>=1],["💪","-3 kg",wl>=3],["🦄","Unicorn 90%",S.uni>=90]];
+  $("badges").innerHTML=B.map(([e,l,g])=>`<div class="bdg ${g?"got":"lock"}"><i>${e}</i>${l}</div>`).join("");
+  // wins
+  const W=days.map((d,i)=>[d,(DB[key(d)]||{}).win]).filter(x=>x[1]).reverse();
+  $("wins").innerHTML=W.length?W.map(([d,w])=>`<div class="win">🏆 ${w.replace(/</g,"&lt;")}<small>${fmt(d)}</small></div>`).join(""):'<div class="sub" style="margin-top:8px">Write your first win in the "Aaj" page tonight ✍️</div>';
+}
+
 let tab="today";
-function renderAll(){renderStatic();renderDay();if(tab==="sheet")renderSheet();if(tab==="study")renderStudy();if(tab==="interview")renderIQ();}
+function renderAll(){renderStatic();renderDay();if(tab==="growth")renderGrowth();if(tab==="sheet")renderSheet();if(tab==="study")renderStudy();if(tab==="interview")renderIQ();}
 function show(t){tab=t;document.querySelectorAll("section").forEach(s=>s.classList.toggle("hide",s.id!==t));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
-  if(t==="sheet")renderSheet();if(t==="study")renderStudy();if(t==="interview")renderIQ();window.scrollTo(0,0);}
+  if(t==="sheet")renderSheet();if(t==="study")renderStudy();if(t==="interview")renderIQ();if(t==="growth")renderGrowth();window.scrollTo(0,0);}
 document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.t));
 
 // ---------- GitHub Gist sync ----------
