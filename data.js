@@ -441,6 +441,6 @@ const OFFICE = [
  ["Fiber + paani","2 fruits + salad/sabzi daily + 3 L water. At night 1 tsp isabgol in koomat paani. Digestion stays smooth."],
  ["Toilet madhe phone nako","Don't sit for more than 5 min, and don't strain. No phone in the bathroom. This is important."],
  ["Aalas (laziness) cha upay","After waking: cold water on your face + a glass of water + 10 min of sunlight/outdoors. Eat a light lunch. Avoid sugar (it causes energy crashes). Lay out tomorrow's clothes at night."],
- ["Fat loss rules","No sugar, maida, cold drinks, packaged snacks · protein in every meal · last meal by 9 pm · no late-night munching · strength 2×/week + running. Fat goes slowly but surely: 0.5 kg/week = ~3.5 kg in 49 days."],
+ ["Fat loss rules","No sugar, maida, cold drinks, packaged snacks · protein in every meal · last meal by 9 pm · no late-night munching · strength hafte mein 2 din + running. Fat goes slowly but surely: 0.5 kg/week = ~3.5 kg in 49 days."],
  ["Weekly measure (Sunday)","Morning, empty stomach: weight + waist (tape measure at the belly button). Waist going down = belly fat going down. Write both in the tracker."]
 ];
